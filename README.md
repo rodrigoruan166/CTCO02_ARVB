@@ -46,6 +46,8 @@ As árvores 2-3-4 e Rubro-Negras são estruturas de dados balanceadas com propri
 │   ├── RubroNegra.c/.h        # Implementação da árvore Rubro-Negra
 │   ├── conversor.c/.h         # Conversão entre 2-3-4 e Rubro-Negra
 │   └── utils.c/.h             # Utilitários e funções auxiliares
+├── utils/
+│   ├── utils.c/.h             # Funções auxiliares da aplicação
 ├── dados/
 │   ├── entrada_100.txt        # Arquivo de teste com 100 elementos
 │   └── ...
