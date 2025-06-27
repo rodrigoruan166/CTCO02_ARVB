@@ -184,8 +184,25 @@ noRB *Tree_Minimum(rb *T, noRB *x)
     return x;
 }
 
-void left_rotate(rb *T, noRB *y)
-{
+void left_rotate(rb *T, noRB *x) {
+    noRB *y = x->dir;
+    x->dir = y->esq;
+    if (y->esq != T->nil)
+        y->esq->pai = x;
+
+    y->pai = x->pai;
+    if (x->pai == T->nil)
+        T->raiz = y;
+    else if (x == x->pai->esq)
+        x->pai->esq = y;
+    else
+        x->pai->dir = y;
+
+    y->esq = x;
+    x->pai = y;
+}
+
+void right_rotate(rb *T, noRB *y) {
     noRB *x = y->esq;
     y->esq = x->dir;
     if (x->dir != T->nil)
@@ -201,27 +218,6 @@ void left_rotate(rb *T, noRB *y)
 
     x->dir = y;
     y->pai = x;
-}
-
-void right_rotate(rb *T, noRB *x)
-{
-    noRB *y = x->dir;
-    x->dir = y->esq;
-
-    if (y->esq != T->nil)
-        y->esq->pai = x;
-
-    y->pai = x->pai;
-
-    if (x->pai == T->nil)
-        T->raiz = y;
-    else if (x == x->pai->esq)
-        x->pai->esq = y;
-    else
-        x->pai->dir = y;
-
-    y->esq = x;
-    x->pai = y;
 }
 
 void percorrePreOrdem(rb *T, noRB *aux)
