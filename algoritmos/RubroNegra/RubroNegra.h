@@ -11,30 +11,73 @@
  * Data: 19/06/2025
  ******************************************************************************/
 
+// Definição do tipo de nó da árvore Rubro-Negra
 typedef struct NO noRB;
 
+// Definição da estrutura da árvore Rubro-Negra
 typedef struct RB rb;
 
+/**
+ * Aloca e inicializa uma nova árvore Rubro-Negra com o nó nil.
+ */
 rb *alocaArvore();
 
+/**
+ * Aloca e inicializa um novo nó com a chave fornecida.
+ * O nó é inicialmente colorido como vermelho.
+ */
 noRB *alocaNo(rb *arv, int chave);
 
+/**
+ * Insere o nó z na árvore Rubro-Negra T, mantendo suas propriedades.
+ */
 void insereNo(rb *T, noRB *z);
 
+/**
+ * Corrige as propriedades da árvore após a inserção de um nó.
+ */
 void RB_Insert_Fixup(rb *T, noRB *z);
 
+/**
+ * Substitui o nó u pelo nó v na árvore T.
+ * Usado principalmente durante a remoção de nós.
+ */
 void RB_Transplant(rb *T, noRB *u, noRB *v);
 
+/**
+ * Retorna o nó com o menor valor na subárvore cuja raiz é x.
+ */
 noRB *Tree_Minimum(rb *T, noRB *x);
 
+/**
+ * Realiza uma rotação à esquerda no nó y.
+ * Utilizado para reequilibrar a árvore.
+ */
 void left_rotate(rb *T, noRB *y);
 
+/**
+ * Realiza uma rotação à direita no nó x.
+ * Utilizado para reequilibrar a árvore.
+ */
 void right_rotate(rb *T, noRB *x);
 
+/**
+ * Percorre a árvore em pré-ordem a partir do nó aux, imprimindo suas chaves.
+ */
 void percorrePreOrdem(rb *T, noRB *aux);
 
+/**
+ * Retorna a raiz da árvore Rubro-Negra T.
+ */
 noRB *retornaRaiz(rb *T);
 
+/**
+ * Remove o nó com a chave fornecida da árvore T.
+ * Retorna 1 se a remoção for bem-sucedida, 0 caso contrário.
+ */
 int removeNo(rb *T, int chave);
 
+/**
+ * Corrige a árvore Rubro-Negra após a remoção de um nó.
+ */
 void RB_Delete_Fixup(rb *T, noRB *x);

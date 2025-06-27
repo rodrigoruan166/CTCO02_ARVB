@@ -16,12 +16,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../../algoritmos/RubroNegra/RubroNegra.h"
+#include "./testeRubroNegra.h"
 
-typedef void (*f)();
+const int NUMBER_OF_TEST_CASES = 15;
+f functions[] = {
+    teste1, teste2, teste3, teste4, teste5, teste6, teste7, teste8, teste9,
+    teste10, teste11, teste12, teste13, teste14, teste15};
 
-// https://www.youtube.com/watch?v=qA02XWRTBdw - CASO 1 - INSERÇÃO
-void caso1() {
-    printf(" ---------- CASO 1 ----------\n");
+void teste1()
+{
     rb *arv = alocaArvore();
 
     if (!arv)
@@ -29,7 +32,8 @@ void caso1() {
 
     int chaves[] = {10, 18, 7, 15, 16, 30, 25, 40, 60, 2, 1, 70};
 
-    for (int i = 0; i < sizeof(chaves)/sizeof(int); i++) {
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
         noRB *novoNo = alocaNo(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
@@ -37,9 +41,8 @@ void caso1() {
     percorrePreOrdem(arv, retornaRaiz(arv));
 }
 
-// https://www.youtube.com/watch?v=UFrg_XKFZ7M - CASO 2 - INSERÇÃO
-void caso2() {
-    printf(" ---------- CASO 2 ----------\n");
+void teste2()
+{
     rb *arv = alocaArvore();
 
     if (!arv)
@@ -47,7 +50,8 @@ void caso2() {
 
     int chaves[] = {10, 18, 7, 15, 16, 30, 25, 40};
 
-    for (int i = 0; i < sizeof(chaves)/sizeof(int); i++) {
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
         noRB *novoNo = alocaNo(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
@@ -55,9 +59,8 @@ void caso2() {
     percorrePreOrdem(arv, retornaRaiz(arv));
 }
 
-// https://cs.valdosta.edu/~dgibson/courses/cs3410/notes/ch19_5.pdf - CASO 3 - INSERÇÃO (Ex. 9)
-void caso3() {
-    printf(" ---------- CASO 3 ----------\n");
+void teste3()
+{
     rb *arv = alocaArvore();
 
     if (!arv)
@@ -65,7 +68,8 @@ void caso3() {
 
     int chaves[] = {10, 85, 15, 70, 20, 60, 30, 50, 65, 80, 90, 40, 5, 55};
 
-    for (int i = 0; i < sizeof(chaves)/sizeof(int); i++) {
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
         noRB *novoNo = alocaNo(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
@@ -73,10 +77,8 @@ void caso3() {
     percorrePreOrdem(arv, retornaRaiz(arv));
 }
 
-// https://www.youtube.com/watch?v=w5cvkTXY0vQ 9:00 - CASO 4 - REMOÇÃO
-// Nó que vai ser deletado é vermelho
-void caso4() {
-    printf(" ---------- CASO 4 ----------\n");
+void teste4()
+{
     rb *arv = alocaArvore();
 
     if (!arv)
@@ -84,7 +86,8 @@ void caso4() {
 
     int chaves[] = {10, 7, 20, 30};
 
-    for (int i = 0; i < sizeof(chaves)/sizeof(int); i++) {
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
         noRB *novoNo = alocaNo(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
@@ -93,10 +96,8 @@ void caso4() {
     percorrePreOrdem(arv, retornaRaiz(arv));
 }
 
-// https://www.youtube.com/watch?v=w5cvkTXY0vQ 12:00 - CASO 5 - REMOÇÃO
-// Nó a ser deletado é vermelho, pegar inorder sucessor
-void caso5() {
-    printf(" ---------- CASO 5 ----------\n");
+void teste5()
+{
     rb *arv = alocaArvore();
 
     if (!arv)
@@ -104,7 +105,8 @@ void caso5() {
 
     int chaves[] = {10, 7, 20, 30};
 
-    for (int i = 0; i < sizeof(chaves)/sizeof(int); i++) {
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
         noRB *novoNo = alocaNo(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
@@ -113,9 +115,8 @@ void caso5() {
     percorrePreOrdem(arv, retornaRaiz(arv));
 }
 
-// https://www.youtube.com/watch?v=w5cvkTXY0vQ 12:51 - CASO 6 - REMOÇÃO
-void caso6() {
-    printf(" ---------- CASO 6 ----------\n");
+void teste6()
+{
     rb *arv = alocaArvore();
 
     if (!arv)
@@ -123,7 +124,8 @@ void caso6() {
 
     int chaves[] = {10, 5, 2, 9, 30, 25, 40, 38};
 
-    for (int i = 0; i < sizeof(chaves)/sizeof(int); i++) {
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
         noRB *novoNo = alocaNo(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
@@ -132,14 +134,187 @@ void caso6() {
     percorrePreOrdem(arv, retornaRaiz(arv));
 }
 
-const int NUMBER_OF_TEST_CASES = 6;
-f functions[] = {
-    caso1, caso2, caso3, caso4, caso5, caso6
-};
+void teste7()
+{
+    rb *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {10, 5, 20, 15, 30, 40};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        noRB *novoNo = alocaNo(arv, chaves[i]);
+        insereNo(arv, novoNo);
+    }
+
+    removeNo(arv, 40); // Deixa igual a imagem em casos/caso7
+    removeNo(arv, 15);
+    percorrePreOrdem(arv, retornaRaiz(arv));
+}
+
+void teste8()
+{
+    rb *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {11, 2, 14, 1, 7, 15, 5, 8, 4};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        noRB *novoNo = alocaNo(arv, chaves[i]);
+        insereNo(arv, novoNo);
+    }
+
+    removeNo(arv, 1);
+    percorrePreOrdem(arv, retornaRaiz(arv));
+}
+
+void teste9()
+{
+    rb *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {5, 1, 10, 2, 0, 3};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        noRB *novoNo = alocaNo(arv, chaves[i]);
+        insereNo(arv, novoNo);
+    }
+
+    removeNo(arv, 0);
+    percorrePreOrdem(arv, retornaRaiz(arv));
+}
+
+void teste10()
+{
+    rb *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {5, 1, 10, 2, 0};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        noRB *novoNo = alocaNo(arv, chaves[i]);
+        insereNo(arv, novoNo);
+    }
+
+    removeNo(arv, 3); // Deixa igual imagem casos/caso10
+    removeNo(arv, 0);
+    percorrePreOrdem(arv, retornaRaiz(arv));
+}
+
+void teste11()
+{
+    rb *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {5, 1, 10, 2, 0, 3};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        noRB *novoNo = alocaNo(arv, chaves[i]);
+        insereNo(arv, novoNo);
+    }
+
+    removeNo(arv, 10);
+    percorrePreOrdem(arv, retornaRaiz(arv));
+}
+
+void teste12()
+{
+    rb *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {20, 0, 40, 1, 41, 30, 25, 2};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        noRB *novoNo = alocaNo(arv, chaves[i]);
+        insereNo(arv, novoNo);
+    }
+
+    removeNo(arv, 2);
+    removeNo(arv, 0); // Deixa a árvore igual na imagem do caso 12
+    removeNo(arv, 1);
+    percorrePreOrdem(arv, retornaRaiz(arv));
+}
+
+void teste13()
+{
+    rb *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {20, 0, 40, 1};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        noRB *novoNo = alocaNo(arv, chaves[i]);
+        insereNo(arv, novoNo);
+    }
+
+    removeNo(arv, 40);
+    percorrePreOrdem(arv, retornaRaiz(arv));
+}
+
+void teste14()
+{
+    rb *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {20, 1, 40, 0};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        noRB *novoNo = alocaNo(arv, chaves[i]);
+        insereNo(arv, novoNo);
+    }
+
+    removeNo(arv, 40);
+    percorrePreOrdem(arv, retornaRaiz(arv));
+}
+
+void teste15()
+{
+    rb *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {20, 1, 40, 0};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        noRB *novoNo = alocaNo(arv, chaves[i]);
+        insereNo(arv, novoNo);
+    }
+
+    removeNo(arv, 0); // Deixa a árvore igual na imagem do caso 15
+    removeNo(arv, 40);
+    percorrePreOrdem(arv, retornaRaiz(arv));
+}
 
 int main()
 {
-    for (int i = 0; i < NUMBER_OF_TEST_CASES; i++) {
+    for (int i = 0; i < NUMBER_OF_TEST_CASES; i++)
+    {
+        printf(" ------ CASO %d ------\n", i + 1);
         functions[i]();
     }
 

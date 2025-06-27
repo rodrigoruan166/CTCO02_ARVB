@@ -35,6 +35,7 @@ Cálculo:
 // Define a estrutura do nó de uma árvore-b 2-3-4
 struct NO {
     no234 **vetFilho;
+    no234 **vetFilho;
     int *vetChaves;
     int ocupacaoFilhos;
     int ocupacaoChaves;

@@ -27,9 +27,10 @@ struct NO
 {
     int chave;
     noRB *dir, *esq, *pai;
-    char cor;
+    char cor; // 'P' para preto, 'V' para vermelho
 };
 
+// Aloca e inicializa a estrutura da árvore Rubro-Negra
 rb *alocaArvore()
 {
     rb *arv = (rb *)malloc(sizeof(rb));
@@ -44,12 +45,13 @@ rb *alocaArvore()
 
     nil->chave = INT_MIN;
     nil->dir = nil->esq = nil->pai = nil;
-    nil->cor = 'P';
+    nil->cor = 'P'; // nil é sempre preto
     arv->nil = arv->raiz = nil;
 
     return arv;
 }
 
+// Aloca e inicializa um novo nó com a chave fornecida
 noRB *alocaNo(rb *arv, int chave)
 {
     if (!arv)
@@ -68,11 +70,13 @@ noRB *alocaNo(rb *arv, int chave)
 }
 
 // RB-Insert, Cormen - Introduction to Algorithms
+// Insere um novo nó z na árvore T, seguindo a lógica da BST e depois ajustando com RB_Insert_Fixup
 void insereNo(rb *T, noRB *z)
 {
     noRB *y = T->nil;
     noRB *x = T->raiz;
 
+    // Busca a posição correta para inserir o novo nó
     while (x != T->nil)
     {
         y = x;
@@ -88,6 +92,7 @@ void insereNo(rb *T, noRB *z)
 
     z->pai = y;
 
+    // Define se o novo nó será filho à esquerda ou direita
     if (y == T->nil)
     {
         T->raiz = z;
@@ -101,21 +106,25 @@ void insereNo(rb *T, noRB *z)
         y->dir = z;
     }
 
+    // Inicializa filhos com nil e cor vermelha
     z->esq = T->nil;
     z->dir = T->nil;
     z->cor = 'V';
+
+    // Corrige possíveis violações das propriedades da RB Tree
     RB_Insert_Fixup(T, z);
 }
 
 // RB-Insert-Fixup, Cormen - Introduction to Algorithms
+// Corrige a árvore após inserção para manter as propriedades da RB Tree
 void RB_Insert_Fixup(rb *T, noRB *z)
 {
     while (z->pai->cor == 'V')
     {
         if (z->pai == z->pai->pai->esq)
         {
-            noRB *y = z->pai->pai->dir;
-            if (y->cor == 'V')
+            noRB *y = z->pai->pai->dir; // tio de z
+            if (y->cor == 'V') // Caso 1
             {
                 z->pai->cor = 'P';
                 y->cor = 'P';
@@ -124,11 +133,12 @@ void RB_Insert_Fixup(rb *T, noRB *z)
             }
             else
             {
-                if (z == z->pai->dir)
+                if (z == z->pai->dir) // Caso 2
                 {
                     z = z->pai;
                     left_rotate(T, z);
                 }
+                // Caso 3
                 z->pai->cor = 'P';
                 z->pai->pai->cor = 'V';
                 right_rotate(T, z->pai->pai);
@@ -157,9 +167,10 @@ void RB_Insert_Fixup(rb *T, noRB *z)
             }
         }
     }
-    T->raiz->cor = 'P';
+    T->raiz->cor = 'P'; // raiz sempre preta
 }
 
+// Substitui o nó u pelo nó v (usado em remoção)
 void RB_Transplant(rb *T, noRB *u, noRB *v)
 {
     if (u->pai == T->nil)
@@ -177,6 +188,7 @@ void RB_Transplant(rb *T, noRB *u, noRB *v)
     v->pai = u->pai;
 }
 
+// Retorna o nó com a menor chave na subárvore de x
 noRB *Tree_Minimum(rb *T, noRB *x)
 {
     while (x->esq != T->nil)
@@ -220,6 +232,7 @@ void right_rotate(rb *T, noRB *y) {
     y->pai = x;
 }
 
+// Percorre a árvore em pré-ordem imprimindo chave e cor dos nós
 void percorrePreOrdem(rb *T, noRB *aux)
 {
     if (!aux || aux == T->nil || !T)
@@ -230,12 +243,14 @@ void percorrePreOrdem(rb *T, noRB *aux)
     percorrePreOrdem(T, aux->dir);
 };
 
+// Retorna o ponteiro da raiz da árvore
 noRB *retornaRaiz(rb *T)
 {
     return T->raiz;
 }
 
 // RB-Delete, Cormen - Introduction to Algorithms
+// Remove o nó com a chave especificada da árvore
 int removeNo(rb *T, int chave)
 {
     if (!T)
@@ -250,7 +265,7 @@ int removeNo(rb *T, int chave)
         z = chave < z->chave ? z->esq : z->dir;
     }
 
-    if (z == T->nil) // Elemento não encontrado
+    if (z == T->nil) // chave não encontrada
         return 0;
 
     noRB *y = z, *x;
@@ -295,6 +310,7 @@ int removeNo(rb *T, int chave)
     return 1;
 };
 
+// Corrige as propriedades da árvore após remoção de um nó
 void RB_Delete_Fixup(rb *T, noRB *x)
 {
     noRB *w;
