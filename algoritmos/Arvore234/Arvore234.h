@@ -10,3 +10,56 @@
  *
  * Data: 19/06/2025
  ******************************************************************************/
+
+typedef struct NO no234;
+typedef struct arv arv234;
+
+/*
+Aloca uma árvore 2-3-4 (árvore-b de ordem 4)
+*/
+arv234 *alocaArvore();
+
+/*
+Aloca um novo nó seguindo a estrutura de requisitos de ordem 4
+*/
+no234 *alocaNo();
+/*
+Retira uma chave da árvore a partir do valor
+ Fluxo: 
+    1. Busca
+    2. Encontra a posição
+    3. Insere o elemento
+    4. Rebalanceia se necessário
+*/ 
+void insereChave(int valor, arv234 *arv);
+/*
+Realiza um split em um nó com o número máximo de chaves.
+Retorna o nó pai
+*/ 
+no234 *split(no234 *noCheio, arv234 *arv);
+/*
+Retira uma chave da árvore a partir do valor
+ Fluxo: 
+    1. Busca
+    2. Encontra o valor
+    3. Retira o elemento
+    4. Rebalanceia se necessário
+*/ 
+void removeChave(int valor, arv234 *arv);
+/*
+Pega "emprestado" do irmão (imediatamente a esquerda ou imediatamente a direita dele), 
+caso seja possível, para rebalancear o nó 
+*/
+void borrow(no234 *noDesbalanceado, no234 *irmao);
+/*
+Executa a rotina de merge para rebalancear o nó
+*/
+void merge(no234 *noDesbalanceado, no234 *irmao);
+/*
+Encontra o valor do predecessor para um dado nó origem
+*/
+int encontraPredecessor(no234 *origem);
+/*
+Encontra o valor do sucessor para um dado nó origem
+*/
+int encontraSucessor(no234 *origem);
