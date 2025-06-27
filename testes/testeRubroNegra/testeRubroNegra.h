@@ -36,5 +36,8 @@ void teste6();
 // https://medium.com/analytics-vidhya/deletion-in-red-black-rb-tree-92301e1474ea 12:51 - CASO 7 - REMOÇÃO
 void teste7();
 
-// Z preto, Y preto, Irmão preto e filho da esquerda é vermelho
+// Z à esquerda do pai, Z preto, Y preto, Irmão preto e filho da esquerda é vermelho (3º caso irmão)
 void teste8();
+
+// Z à esquerda do pai, Z preto, Y preto, Irmão preto e filho da direita é vermelho (4º caso irmão)
+void teste9();
