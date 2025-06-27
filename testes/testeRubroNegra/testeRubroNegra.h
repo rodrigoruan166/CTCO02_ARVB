@@ -41,3 +41,6 @@ void teste8();
 
 // Z à esquerda do pai, Z preto, Y preto, Irmão preto e filho da direita é vermelho (4º caso irmão)
 void teste9();
+
+// Z à esquerda do pai, Z preto, Y preto, Irmão preto e ambos filhos pretos (2º caso irmão)
+void teste10();
