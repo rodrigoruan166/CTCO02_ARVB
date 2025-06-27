@@ -10,3 +10,21 @@
  *
  * Data: 19/06/2025
  ******************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "Arvore234.h"
+
+struct no {
+    no234 *vetFilho;
+    int *vetChaves;
+    int ocupacaoFilhos;
+    int ocupacaoChaves;
+    int folha;
+    no234 *noPai;
+};
+
+struct arv {
+    no234 *raiz;
+    int ordem;
+};  
