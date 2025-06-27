@@ -18,9 +18,9 @@
 #include "../../algoritmos/RubroNegra/RubroNegra.h"
 #include "./testeRubroNegra.h"
 
-const int NUMBER_OF_TEST_CASES = 7;
+const int NUMBER_OF_TEST_CASES = 8;
 f functions[] = {
-    teste1, teste2, teste3, teste4, teste5, teste6, teste7};
+    teste1, teste2, teste3, teste4, teste5, teste6, teste7, teste8};
 
 void teste1()
 {
@@ -150,6 +150,25 @@ void teste7()
 
     removeNo(arv, 40); // Deixa igual a imagem em casos/caso7
     removeNo(arv, 15);
+    percorrePreOrdem(arv, retornaRaiz(arv));
+}
+
+void teste8()
+{
+    rb *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {11, 2, 14, 1, 7, 15, 5, 8, 4};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        noRB *novoNo = alocaNo(arv, chaves[i]);
+        insereNo(arv, novoNo);
+    }
+
+    removeNo(arv, 1);
     percorrePreOrdem(arv, retornaRaiz(arv));
 }
 
