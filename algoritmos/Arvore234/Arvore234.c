@@ -33,7 +33,7 @@ Cálculo:
 
 // Define a estrutura do nó de uma árvore-b 2-3-4
 struct NO {
-    no234 *vetFilho;
+    no234 **vetFilho;
     int *vetChaves;
     int ocupacaoFilhos;
     int ocupacaoChaves;
@@ -56,7 +56,7 @@ no234 *alocaNo() {
     // Razão: Se detectarmos que ele ultrapassou, faremos um cálculo com o valor médio da esquerda
     //        para escolher qual chave será passado ao nó de cima. Mas a chave deve ser considerada nesse cálculo
     int *vetChaves = (int*) malloc((MAX_CHAVES + 1) * sizeof(int));
-    no234 *vetFilhos = (no234*) malloc(MAX_FILHOS * sizeof(no234));
+    no234 **vetFilhos = (no234**) malloc(MAX_FILHOS * sizeof(no234*));
 
     // Adiciona todos os atributos
     n->ocupacaoChaves = n->ocupacaoFilhos = 0;
