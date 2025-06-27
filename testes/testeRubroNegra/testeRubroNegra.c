@@ -18,10 +18,10 @@
 #include "../../algoritmos/RubroNegra/RubroNegra.h"
 #include "./testeRubroNegra.h"
 
-const int NUMBER_OF_TEST_CASES = 14;
+const int NUMBER_OF_TEST_CASES = 15;
 f functions[] = {
     teste1, teste2, teste3, teste4, teste5, teste6, teste7, teste8, teste9,
-    teste10, teste11, teste12, teste13, teste14};
+    teste10, teste11, teste12, teste13, teste14, teste15};
 
 void teste1()
 {
@@ -286,6 +286,26 @@ void teste14()
         insereNo(arv, novoNo);
     }
 
+    removeNo(arv, 40);
+    percorrePreOrdem(arv, retornaRaiz(arv));
+}
+
+void teste15()
+{
+    rb *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {20, 1, 40, 0};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        noRB *novoNo = alocaNo(arv, chaves[i]);
+        insereNo(arv, novoNo);
+    }
+
+    removeNo(arv, 0); // Deixa a árvore igual na imagem do caso 15
     removeNo(arv, 40);
     percorrePreOrdem(arv, retornaRaiz(arv));
 }
