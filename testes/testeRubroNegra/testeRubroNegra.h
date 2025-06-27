@@ -53,3 +53,6 @@ void teste12();
 
 // Z à direita do pai, Z preto, Y preto, Irmão preto e filho da direita vermelho (2º caso irmão - 2 tabela)
 void teste13();
+
+// Z à direita do pai, Z preto, Y preto, Irmão preto e filho da esquerda vermelho (3º caso irmão - 2 tabela)
+void teste14();
