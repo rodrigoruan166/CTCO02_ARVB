@@ -243,37 +243,42 @@ void imprimirPorNivel(arv234 *arv) {
         printf("Árvore vazia!\n");
         return;
     }
-    
-    // Simulação de fila usando array (máximo 1000 nós)
+
     no234 *fila[1000];
-    int niveis[1000];  // Armazena o nível de cada nó
+    int niveis[1000];
     int inicio = 0, fim = 0;
     int nivelAtual = 0;
-    
-    // Inicia com a raiz
+
     fila[fim] = arv->raiz;
     niveis[fim] = 0;
     fim++;
-    
+
     printf("Árvore por níveis:\n");
     printf("Nível 0: ");
     
+    no234 *ultimoPai = NULL;
+
     while (inicio < fim) {
         no234 *noAtual = fila[inicio];
         int nivelNo = niveis[inicio];
         inicio++;
-        
-        // Se mudou de nível, imprime quebra de linha
+
         if (nivelNo > nivelAtual) {
             printf("\nNível %d: ", nivelNo);
             nivelAtual = nivelNo;
+            ultimoPai = NULL; // Reset para o novo nível
         }
-        
-        // Imprime nó atual
+
+        // Se o pai for diferente do anterior, imprime " || "
+        if (ultimoPai != NULL && noAtual->noPai != ultimoPai) {
+            printf(" || ");
+        } else if (ultimoPai != NULL) {
+            printf(" ");
+        }
+
         imprimirChavesNo(noAtual);
-        printf(" ");
-        
-        // Adiciona filhos à fila
+        ultimoPai = noAtual->noPai;
+
         if (!noAtual->folha) {
             for (int i = 0; i < noAtual->ocupacaoFilhos; i++) {
                 if (noAtual->vetFilho[i] != NULL) {
@@ -283,9 +288,56 @@ void imprimirPorNivel(arv234 *arv) {
                 }
             }
         }
-
     }
+
     printf("\n");
+}
+
+void removeChave(int valor, arv234 *arv) {
+    no234 *aux = arv->raiz;
+
+    // Faz uma busca para encontrar o nó em que o valor está.
+    while(aux != NULL) {
+        printf("BUSCANDO EM: \n");
+        printf("\t[");
+        for(int j = 0; j < aux->ocupacaoChaves; j++)
+            printf("%d ", aux->vetChaves[j]);
+        printf("]\n");
+        int flag = 0, i;
+        for(i = 0; i < aux->ocupacaoChaves; i++) {
+            if (aux->vetChaves[i] == valor) {
+                flag = 1;
+                break;
+            }
+            
+            if (aux->vetChaves[i] > valor)
+                break;
+        }
+        
+        if(flag) {
+            printf("Encontramos o NO PROCURADO\n");
+            break;
+        } 
+
+        if (aux->ocupacaoFilhos == 0) {
+            aux = NULL;
+            break;
+        } else if (aux->vetChaves[i] < valor) {
+            printf("Indo para o filho %d\n", i);
+            aux = aux->vetFilho[i+1]; 
+        }
+            
+        else {
+            printf("Indo para o filho %d\n", i);
+            aux = aux->vetFilho[i];
+        } 
+    }
+    if(!aux) return;
+    printf("[");
+    for(int j = 0; j < aux->ocupacaoChaves; j++)
+        printf("%d", aux->vetChaves[j]);
+    printf("]");
+    
 }
 
 
