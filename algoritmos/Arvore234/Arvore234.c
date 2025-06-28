@@ -244,6 +244,8 @@ void imprimirPorNivel(arv234 *arv) {
         return;
     }
 
+    printf("kfdksfdsk\n");
+
     no234 *fila[1000];
     int niveis[1000];
     int inicio = 0, fim = 0;
@@ -293,17 +295,16 @@ void imprimirPorNivel(arv234 *arv) {
     printf("\n");
 }
 
-void removeChave(int valor, arv234 *arv) {
+no234 *buscaNo(int valor, int *pos, arv234 *arv) {
     no234 *aux = arv->raiz;
-
-    // Faz uma busca para encontrar o nó em que o valor está.
     while(aux != NULL) {
-        printf("BUSCANDO EM: \n");
-        printf("\t[");
-        for(int j = 0; j < aux->ocupacaoChaves; j++)
-            printf("%d ", aux->vetChaves[j]);
-        printf("]\n");
         int flag = 0, i;
+
+        printf("[");
+        for(int i = 0; i < aux->ocupacaoChaves; i++) {
+            printf(" %d ", aux->vetChaves[i]);
+        }
+        printf("]\n");
         for(i = 0; i < aux->ocupacaoChaves; i++) {
             if (aux->vetChaves[i] == valor) {
                 flag = 1;
@@ -315,28 +316,60 @@ void removeChave(int valor, arv234 *arv) {
         }
         
         if(flag) {
-            printf("Encontramos o NO PROCURADO\n");
+            *pos = i;
+            printf("Achou na posicao %d\n", *pos);
+            printf("Encontrado: [");
+            for(int i = 0; i < aux->ocupacaoChaves; i++) {
+                printf(" %d ", aux->vetChaves[i]);
+            }
+            printf("]\n");
             break;
         } 
 
         if (aux->ocupacaoFilhos == 0) {
             aux = NULL;
             break;
-        } else if (aux->vetChaves[i] < valor) {
-            printf("Indo para o filho %d\n", i);
-            aux = aux->vetFilho[i+1]; 
-        }
-            
+        }   
         else {
-            printf("Indo para o filho %d\n", i);
+            printf(" > Indo para o filho %d\n", i);
             aux = aux->vetFilho[i];
         } 
     }
-    if(!aux) return;
-    printf("[");
-    for(int j = 0; j < aux->ocupacaoChaves; j++)
-        printf("%d", aux->vetChaves[j]);
-    printf("]");
+
+    return aux;
+}
+
+void removeChave(int valor, arv234 *arv) {
+    // Faz uma busca para encontrar o nó em que o valor está.
+    printf(">>>>>>>>>>>>> TENTANDO TIRAR %d <<<<<<<<<<<<<<<<<\n", valor);
+    int pos;
+    no234 *aux = buscaNo(valor, &pos, arv);
+    if(!aux) {
+        printf("Chave não encontrada.\n");
+        return;
+    }
+        
+    if(aux->folha) {
+        printf("Nó é folha\n");
+
+        // Caso 1 (Folha) : Quantidade de chaves é maior que MIN_CHAVES
+        if(aux->ocupacaoChaves > MIN_CHAVES) {
+            printf("c e pos: %d\n", pos);
+
+            // Faz o shift caso o elemento seja no meio do vetor
+            for(int index = aux->ocupacaoChaves-1; index > pos; index--) 
+                aux->vetChaves[index-1] = aux->vetChaves[index];
+            
+            // Atualiza o ultimo indice para INT_MIN
+            aux->vetChaves[aux->ocupacaoChaves-1] = INT_MIN;
+            aux->ocupacaoChaves--;
+        }
+
+        // Caso 2 (Folha) : Quantidade de chaves é menor ou igual a MIN_CHAVES
+        else {
+
+        }
+    }
     
 }
 
