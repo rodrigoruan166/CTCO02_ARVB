@@ -18,9 +18,9 @@
 #include "../../algoritmos/Arvore234/Arvore234.h"
 #include "./teste234.h"
 
-const int NUMBER_OF_TEST_CASES = 4;
+const int NUMBER_OF_TEST_CASES = 10;
 f functions[] = {
-    teste1, teste2, teste3, teste4};
+    teste1, teste2, teste3, teste4, teste5, teste6, teste7, teste8, teste9, teste10};
 
 void teste1()
 {
@@ -75,7 +75,7 @@ void teste3()
     imprimirPorNivel(arv);
 }
 
-// PEGA SUCESSOR PARA DAR REPLACE NO ELEMENTO EXCLUIDO
+// REMOVE DO FOLHA do meio, KEYS > MIN_KEYS
 void teste4()
 {
     arv234 *arv = alocaArvore();
@@ -91,6 +91,125 @@ void teste4()
     }
 
     removeChave(2, arv);
+    imprimirPorNivel(arv);
+}
+
+// REMOVE DO FOLHA do canto esquerdo, KEYS > MIN_KEYS
+void teste5()
+{
+    arv234 *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {1,2,3};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    removeChave(1, arv);
+    imprimirPorNivel(arv);
+}
+
+// REMOVE DO FOLHA do canto direito, KEYS > MIN_KEYS
+void teste6()
+{
+    arv234 *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {1,2,3};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    removeChave(3, arv);
+    imprimirPorNivel(arv);
+}
+
+// REMOVE FOLHA COM MERGE À DIREITA
+void teste7()
+{
+    arv234 *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {1,2,3,4};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    removeChave(1, arv);
+    imprimirPorNivel(arv);
+}
+
+// ROTAÇÃO À ESQUERDA
+// 10;9;8;6;5;4;3
+void teste8()
+{
+    arv234 *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {10, 20, 30, 40, 50};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    removeChave(10, arv);
+    imprimirPorNivel(arv);
+}
+
+// MERGE à ESQUERDA
+// 5;10;20;30;40;50
+void teste9()
+{
+    arv234 *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {5, 10, 20, 30, 40, 50};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    removeChave(50, arv);
+    removeChave(40, arv);
+    imprimirPorNivel(arv);
+}
+
+// MERGE à DIREITA
+// 5;10;20;30;40;50
+void teste10()
+{
+    arv234 *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {5, 10, 20, 30, 40, 50};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    removeChave(50, arv);
+    removeChave(5, arv);
     imprimirPorNivel(arv);
 }
 

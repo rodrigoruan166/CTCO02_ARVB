@@ -22,3 +22,15 @@ void teste2();
 void teste3();
 
 void teste4();
+
+void teste5();
+
+void teste6();
+
+void teste7();
+
+void teste8();
+
+void teste9();
+
+void teste10();
