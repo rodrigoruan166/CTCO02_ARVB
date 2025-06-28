@@ -114,9 +114,11 @@ no234 *split(no234 *noCheio, arv234 *arv) {
     }
 
     if (!noCheio->folha) {
-        printf("Condicao no cheio e folha\n");
+        printf("Condicao no cheio nao e folha\n");
+        int count = 0;
         for (int k = posicaoRisingNode + 1; k < MAX_FILHOS + 1; k++) {
             if (noCheio->vetFilho[k] != NULL) {
+                count++;
                 novoDir->vetFilho[k - 2] = noCheio->vetFilho[k];
                 novoDir->vetFilho[k - 2]->noPai = novoDir;  // Atualizar pai
                 noCheio->vetFilho[k] = NULL;
@@ -124,7 +126,7 @@ no234 *split(no234 *noCheio, arv234 *arv) {
         }
         // Atualizar ocupacaoFilhos
         noCheio->ocupacaoFilhos = 2;  // Filhos 0 e 1
-        novoDir->ocupacaoFilhos = 2;  // Filhos que recebeu
+        novoDir->ocupacaoFilhos = count;  // Filhos que recebeu
     }
         
 
@@ -281,6 +283,7 @@ void imprimirPorNivel(arv234 *arv) {
                 }
             }
         }
+
     }
     printf("\n");
 }
