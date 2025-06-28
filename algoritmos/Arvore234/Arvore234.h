@@ -71,6 +71,8 @@ void preOrdemRec(no234 *no);
 
 void preOrdem(arv234 *arv);
 
-void imprimirChavesNo(no234 *no);
+void imprimirChavesNo(no234 *no, int d);
 
 void imprimirPorNivel(arv234 *arv);
+
+no234 *buscaNo(int valor, int *pos, int *posNo, arv234 *arv);

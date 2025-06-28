@@ -224,13 +224,13 @@ void preOrdem(arv234 *arv) {
     printf("\n");
 }
 
-void imprimirChavesNo(no234 *no) {
+void imprimirChavesNo(no234 *no, int d) {
     if (no == NULL) {
         printf("[NULL]");
         return;
     }
     
-    printf("[");
+    printf("[", d);
     for (int i = 0; i < no->ocupacaoChaves; i++) {
         if (i > 0) printf(",");
         printf("%d", no->vetChaves[i]);
@@ -243,49 +243,205 @@ void imprimirPorNivel(arv234 *arv) {
         printf("Árvore vazia!\n");
         return;
     }
-    
-    // Simulação de fila usando array (máximo 1000 nós)
+
+    printf("kfdksfdsk\n");
+
     no234 *fila[1000];
-    int niveis[1000];  // Armazena o nível de cada nó
+    int niveis[1000];
+    int noRelativo[1000];
     int inicio = 0, fim = 0;
     int nivelAtual = 0;
-    
-    // Inicia com a raiz
+
     fila[fim] = arv->raiz;
     niveis[fim] = 0;
     fim++;
-    
+
     printf("Árvore por níveis:\n");
     printf("Nível 0: ");
     
+    no234 *ultimoPai = NULL;
+
     while (inicio < fim) {
         no234 *noAtual = fila[inicio];
         int nivelNo = niveis[inicio];
         inicio++;
-        
-        // Se mudou de nível, imprime quebra de linha
+
         if (nivelNo > nivelAtual) {
             printf("\nNível %d: ", nivelNo);
             nivelAtual = nivelNo;
+            ultimoPai = NULL; // Reset para o novo nível
         }
-        
-        // Imprime nó atual
-        imprimirChavesNo(noAtual);
-        printf(" ");
-        
-        // Adiciona filhos à fila
+
+        // Se o pai for diferente do anterior, imprime " || "
+        if (ultimoPai != NULL && noAtual->noPai != ultimoPai) {
+            printf(" || ");
+        } else if (ultimoPai != NULL) {
+            printf(" ");
+        }
+
+        imprimirChavesNo(noAtual, noRelativo[inicio]);
+        ultimoPai = noAtual->noPai;
+
         if (!noAtual->folha) {
             for (int i = 0; i < noAtual->ocupacaoFilhos; i++) {
                 if (noAtual->vetFilho[i] != NULL) {
                     fila[fim] = noAtual->vetFilho[i];
+                    noRelativo[fim] = i;
                     niveis[fim] = nivelNo + 1;
                     fim++;
                 }
             }
         }
-
     }
+
     printf("\n");
+}
+
+no234 *buscaNo(int valor, int *pos, int *posNo, arv234 *arv) {
+    no234 *aux = arv->raiz;
+    while(aux != NULL) {
+        int flag = 0, i;
+
+        printf("[");
+        for(int i = 0; i < aux->ocupacaoChaves; i++) {
+            printf(" %d ", aux->vetChaves[i]);
+        }
+        printf("]\n");
+        for(i = 0; i < aux->ocupacaoChaves; i++) {
+            if (aux->vetChaves[i] == valor) {
+                flag = 1;
+                break;
+            }
+            
+            if (aux->vetChaves[i] > valor)
+                break;
+        }
+        
+        if(flag) {
+            *pos = i;
+            printf("Achou na posicao %d\n", *pos);
+            printf("Encontrado: [");
+            for(int i = 0; i < aux->ocupacaoChaves; i++) {
+                printf(" %d ", aux->vetChaves[i]);
+            }
+            printf("]\n");
+            break;
+        } 
+
+        if (aux->ocupacaoFilhos == 0) {
+            aux = NULL;
+            break;
+        }   
+        else {
+            printf(" > Indo para o filho %d\n", i);
+            *posNo = i;
+            aux = aux->vetFilho[i];
+        } 
+    }
+
+    return aux;
+}
+
+void removeChave(int valor, arv234 *arv) {
+    // Faz uma busca para encontrar o nó em que o valor está.
+    printf(">>>>>>>>>>>>> TENTANDO TIRAR %d <<<<<<<<<<<<<<<<<\n", valor);
+    int pos, posNo;
+    no234 *aux = buscaNo(valor, &pos, &posNo, arv);
+    if(!aux) {
+        printf("Chave não encontrada.\n");
+        return;
+    }
+        
+    if(aux->folha) {
+        printf("Nó é folha\n");
+
+        // Caso 1 (Folha) : Quantidade de chaves é maior que MIN_CHAVES
+        if(aux->ocupacaoChaves > MIN_CHAVES) {
+            printf("c e pos: %d\n", pos);
+
+            // Faz o shift caso o elemento seja no meio do vetor
+            for(int index = aux->ocupacaoChaves-1; index > pos; index--) 
+                aux->vetChaves[index-1] = aux->vetChaves[index];
+            
+            // Atualiza o ultimo indice para INT_MIN
+            aux->vetChaves[aux->ocupacaoChaves-1] = INT_MIN;
+            aux->ocupacaoChaves--;
+        }
+        // Caso em que a raiz é o único nó e possui o mínimo de chaves, a árvore deixa de existir
+        else if(aux->noPai == NULL) {
+            arv->raiz->vetChaves[0] = INT_MIN;
+            arv->raiz->ocupacaoChaves = 0;
+            arv->raiz->ocupacaoFilhos = 0;
+        }
+        // Caso 2 (Folha) : Quantidade de chaves é menor ou igual a MIN_CHAVES
+        else {
+            no234 *irmaoEsq = ((posNo-1) >= 0 && aux->noPai->vetFilho[posNo-1] != NULL) ? aux->noPai->vetFilho[posNo-1] : NULL;
+            no234 *irmaoDir = ((posNo+1) <= MAX_FILHOS-1 && aux->noPai->vetFilho[posNo+1] != NULL) ? aux->noPai->vetFilho[posNo+1] : NULL;
+            
+            // Se for possível, EMPRESTAR DA ESQ
+            if(irmaoEsq && irmaoEsq->ocupacaoChaves > MIN_CHAVES) {
+                printf("Emprestando do irmao da esquerda.\n");
+
+                /*printf("\n\n\n\t");
+                for(int i = 0; i < aux->noPai->ocupacaoChaves; i++)
+                    printf(" %d ", aux->noPai->vetChaves[i]);
+                
+                printf("\n\tFILHOS\n\n");
+                for(int i = 0; i < aux->noPai->ocupacaoFilhos; i++) {
+                    //printf("(%d) %d ", i, aux->noPai->vetFilho[i]);
+                    printf("  %d  [", i);
+                    for(int j = 0; j < aux->noPai->vetFilho[i]->ocupacaoChaves; j++)
+                        printf(" %d ", aux->noPai->vetFilho[i]->vetChaves[j]);
+                    printf("]");
+
+                }
+                printf("\n\n\n"); */
+
+                int chaveIrmao = irmaoEsq->vetChaves[irmaoEsq->ocupacaoChaves-1];
+                printf("> Chave do irmao encontrada: %d\n", chaveIrmao);
+                irmaoEsq->vetChaves[irmaoEsq->ocupacaoChaves-1] = INT_MIN;
+                int chavePai = aux->noPai->vetChaves[posNo-1];
+                printf("> Chave do PAI encontrada (pos: %d): %d\n", posNo, chavePai);
+
+                // Desce o pai para o nó removido
+                aux->vetChaves[pos] = chavePai;
+                // Sobe o "emprestado" do irmão para o pai
+                aux->noPai->vetChaves[posNo-1] = chaveIrmao;
+
+                irmaoEsq->ocupacaoChaves--;
+            }
+            // Se for possível, EMPRESTAR DA ESQ
+            else if(irmaoDir && irmaoDir->ocupacaoChaves > MIN_CHAVES) {
+
+                int chaveIrmao = irmaoDir->vetChaves[0];
+                printf("> Chave do irmao encontrada: %d\n", chaveIrmao);
+                irmaoDir->vetChaves[0] = INT_MIN;
+                int chavePai = aux->noPai->vetChaves[posNo];
+                printf("> Chave do PAI encontrada (pos: %d): %d\n", posNo, chavePai);
+
+                // Faz um shift porque o primeiro elemento vai ser removido [..., XX, YY] => [XX, YY]
+                for(int index = 0; index < irmaoDir->ocupacaoChaves-1; index++) 
+                    irmaoDir->vetChaves[index] = irmaoDir->vetChaves[index+1];
+                
+                // Desce o pai para o nó removido
+                aux->vetChaves[0] = chavePai;
+
+                // Sobe o "emprestado" do irmão para o pai
+                aux->noPai->vetChaves[posNo] = chaveIrmao;
+
+                irmaoDir->ocupacaoChaves--;
+            }
+            // Se for possível, MERGE DA ESQ
+            else if(irmaoEsq) {
+                printf("a\n");
+            }
+            // Se NÃO, MERGE DA DIR
+            else {
+                 printf("a\n");
+            }
+        }
+    }
+    
 }
 
 
