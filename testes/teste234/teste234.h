@@ -16,3 +16,5 @@
 typedef void (*f)();
 
 void teste1();
+
+void teste2();

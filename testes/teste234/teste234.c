@@ -18,9 +18,9 @@
 #include "../../algoritmos/Arvore234/Arvore234.h"
 #include "./teste234.h"
 
-const int NUMBER_OF_TEST_CASES = 1;
+const int NUMBER_OF_TEST_CASES = 2;
 f functions[] = {
-    teste1};
+    teste1, teste2};
 
 void teste1()
 {
@@ -30,6 +30,23 @@ void teste1()
         return;
 
     int chaves[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    imprimirPorNivel(arv);
+}
+
+void teste2()
+{
+    arv234 *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {5, 3, 21, 9, 1, 13, 2, 7, 10, 12, 4, 8};
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
