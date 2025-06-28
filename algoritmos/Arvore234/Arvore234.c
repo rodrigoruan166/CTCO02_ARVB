@@ -433,11 +433,74 @@ void removeChave(int valor, arv234 *arv) {
             }
             // Se for possível, MERGE DA ESQ
             else if(irmaoEsq) {
-                printf("a\n");
+                for(int i = 0; i < aux->noPai->ocupacaoChaves; i++)
+                    printf(" %d ", aux->noPai->vetChaves[i]);
+                
+                printf("\n\tFILHOS\n\n");
+                for(int i = 0; i < aux->noPai->ocupacaoFilhos; i++) {
+                    //printf("(%d) %d ", i, aux->noPai->vetFilho[i]);
+                    printf("  %d  [", i);
+                    for(int j = 0; j < aux->noPai->vetFilho[i]->ocupacaoChaves; j++)
+                        printf(" %d ", aux->noPai->vetFilho[i]->vetChaves[j]);
+                    printf("]");
+
+                }
+                printf("\n\n\n");
+
+                int chavePai = aux->noPai->vetChaves[posNo-1];
+                printf("Pai encontrado: %d\n", chavePai);
+
+                irmaoEsq->vetChaves[irmaoEsq->ocupacaoChaves] = chavePai;
+                irmaoEsq->ocupacaoChaves++;
+
+                // Shift nas chaves pai
+                for(int index = posNo-1; index < aux->noPai->ocupacaoChaves-1; index++) 
+                    aux->noPai->vetChaves[index] = aux->noPai->vetChaves[index+1];
+                
+                // Shift nos filhos do pai
+                for(int index = posNo; index < aux->noPai->ocupacaoFilhos-1; index++) 
+                    aux->noPai->vetFilho[index] = aux->noPai->vetFilho[index+1];
+
+                aux->noPai->ocupacaoFilhos--;
+                aux->noPai->ocupacaoChaves--;
+
+                free(aux);
             }
             // Se NÃO, MERGE DA DIR
             else {
-                 printf("a\n");
+                 for(int i = 0; i < aux->noPai->ocupacaoChaves; i++)
+                    printf(" %d ", aux->noPai->vetChaves[i]);
+                
+                printf("\n\tFILHOS\n\n");
+                for(int i = 0; i < aux->noPai->ocupacaoFilhos; i++) {
+                    //printf("(%d) %d ", i, aux->noPai->vetFilho[i]);
+                    printf("  %d  [", i);
+                    for(int j = 0; j < aux->noPai->vetFilho[i]->ocupacaoChaves; j++)
+                        printf(" %d ", aux->noPai->vetFilho[i]->vetChaves[j]);
+                    printf("]");
+
+                }
+                printf("\n\n\n");
+
+                int chavePai = aux->noPai->vetChaves[posNo];
+                printf("Pai encontrado: %d\n", chavePai);
+
+                irmaoDir->vetChaves[1] = irmaoDir->vetChaves[0];
+                irmaoDir->vetChaves[0] = chavePai;
+                irmaoDir->ocupacaoChaves++;
+
+                // Shift nas chaves pai
+                for(int index = posNo; index < aux->noPai->ocupacaoChaves-1; index++) 
+                    aux->noPai->vetChaves[index] = aux->noPai->vetChaves[index+1];
+                
+                // Shift nos filhos do pai
+                for(int index = posNo; index < aux->noPai->ocupacaoFilhos-1; index++) 
+                    aux->noPai->vetFilho[index] = aux->noPai->vetFilho[index+1];
+
+                aux->noPai->ocupacaoFilhos--;
+                aux->noPai->ocupacaoChaves--;
+
+                free(aux);
             }
         }
     }
