@@ -58,11 +58,11 @@ void merge(no234 *noDesbalanceado, no234 *irmao);
 /*
 Encontra o valor do predecessor para um dado nó origem
 */
-int encontraPredecessor(no234 *origem);
+no234 *encontraPredecessor(no234 *origem, int posElemento, int *posicaoRel);
 /*
 Encontra o valor do sucessor para um dado nó origem
 */
-int encontraSucessor(no234 *origem);
+no234 *encontraSucessor(no234 *origem, int posElemento);
 
 /*Percorre a árvore*/
 void imprimeArvore(arv234 *arv);
@@ -75,4 +75,12 @@ void imprimirChavesNo(no234 *no, int d);
 
 void imprimirPorNivel(arv234 *arv);
 
+void borrowLeft(no234 *aux, no234* irmaoEsq, int pos, int posNo);
+
+void borrowRight(no234 *aux, no234* irmaoDir, int pos, int posNo);
+
+void mergeLeft(no234 *aux, no234* irmaoEsq, int pos, int posNo);
+
+void mergeRight(no234 *aux, no234* irmaoDir, int pos, int posNo);
+void ajustarParaCima(no234 *no, arv234 *arv);
 no234 *buscaNo(int valor, int *pos, int *posNo, arv234 *arv);
