@@ -18,9 +18,9 @@
 #include "../../algoritmos/Arvore234/Arvore234.h"
 #include "./teste234.h"
 
-const int NUMBER_OF_TEST_CASES = 2;
+const int NUMBER_OF_TEST_CASES = 4;
 f functions[] = {
-    teste1, teste2};
+    teste1, teste2, teste3, teste4};
 
 void teste1()
 {
@@ -53,6 +53,44 @@ void teste2()
         insereChave(chaves[i], arv);
     }
 
+    imprimirPorNivel(arv);
+}
+
+// PEGA SUCESSOR PARA DAR REPLACE NO ELEMENTO EXCLUIDO
+void teste3()
+{
+    arv234 *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {1,2,3,4,5};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    removeChave(1, arv);
+    imprimirPorNivel(arv);
+}
+
+// PEGA SUCESSOR PARA DAR REPLACE NO ELEMENTO EXCLUIDO
+void teste4()
+{
+    arv234 *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {1,2,3};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    removeChave(2, arv);
     imprimirPorNivel(arv);
 }
 

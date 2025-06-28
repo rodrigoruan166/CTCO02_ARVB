@@ -358,10 +358,10 @@ void removeChave(int valor, arv234 *arv) {
         // Caso 1 (Folha) : Quantidade de chaves é maior que MIN_CHAVES
         if(aux->ocupacaoChaves > MIN_CHAVES) {
             printf("c e pos: %d\n", pos);
-
             // Faz o shift caso o elemento seja no meio do vetor
-            for(int index = aux->ocupacaoChaves-1; index > pos; index--) 
-                aux->vetChaves[index-1] = aux->vetChaves[index];
+            for(int index = pos; index < aux->ocupacaoChaves-1; index++) {
+                aux->vetChaves[index] = aux->vetChaves[index + 1];
+            }
             
             // Atualiza o ultimo indice para INT_MIN
             aux->vetChaves[aux->ocupacaoChaves-1] = INT_MIN;
