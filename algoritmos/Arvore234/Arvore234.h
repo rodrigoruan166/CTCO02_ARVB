@@ -66,3 +66,11 @@ int encontraSucessor(no234 *origem);
 
 /*Percorre a árvore*/
 void imprimeArvore(arv234 *arv);
+
+void preOrdemRec(no234 *no);
+
+void preOrdem(arv234 *arv);
+
+void imprimirChavesNo(no234 *no);
+
+void imprimirPorNivel(arv234 *arv);

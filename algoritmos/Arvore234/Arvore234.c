@@ -57,7 +57,7 @@ no234 *alocaNo() {
     // Razão: Se detectarmos que ele ultrapassou, faremos um cálculo com o valor médio da esquerda
     //        para escolher qual chave será passado ao nó de cima. Mas a chave deve ser considerada nesse cálculo
     int *vetChaves = (int*) malloc((MAX_CHAVES + 1) * sizeof(int));
-    no234 **vetFilhos = (no234**) malloc(MAX_FILHOS * sizeof(no234*));
+    no234 **vetFilhos = (no234**) malloc((MAX_FILHOS + 1) * sizeof(no234*));
 
     for (int i = 0; i < MAX_CHAVES+1; i++)
         vetChaves[i] = INT_MIN;
@@ -114,7 +114,8 @@ no234 *split(no234 *noCheio, arv234 *arv) {
     }
 
     if (!noCheio->folha) {
-        for (int k = posicaoRisingNode + 1; k < MAX_FILHOS; k++) {
+        printf("Condicao no cheio e folha\n");
+        for (int k = posicaoRisingNode + 1; k < MAX_FILHOS + 1; k++) {
             if (noCheio->vetFilho[k] != NULL) {
                 novoDir->vetFilho[k - 2] = noCheio->vetFilho[k];
                 novoDir->vetFilho[k - 2]->noPai = novoDir;  // Atualizar pai
@@ -129,6 +130,7 @@ no234 *split(no234 *noCheio, arv234 *arv) {
 
     // Caso em que o split ocorre na raiz.
     if(noCheio->noPai == NULL) {
+        printf("Condicao noCheio e RAIZ\n");
         no234 *novoNoPai = alocaNo();
         // Obs: o nó já inicia com folha = 0, portanto não há necessidade de setar
         // Preenche a nova raiz (pós split) com os dados
@@ -147,12 +149,12 @@ no234 *split(no234 *noCheio, arv234 *arv) {
         return arv->raiz;
     } else {
         // Casos em que o noPai não é nulo (não é raiz)
-
+        printf("    caiu nesse caso??\n");
         // Busca a posição em que vamos inserir
         no234 *pai = noCheio->noPai;
         int i = pai->ocupacaoChaves;
         int valorChaveRisingNode = noCheio->vetChaves[posicaoRisingNode];
-        while(i > 0 && valorChaveRisingNode < pai->vetChaves[i]) {
+        while(i > 0 && valorChaveRisingNode < pai->vetChaves[i-1]) {
             pai->vetChaves[i] = pai->vetChaves[i-1];
             pai->vetFilho[i+1] = pai->vetFilho[i];
             i--;
@@ -176,13 +178,113 @@ no234 *split(no234 *noCheio, arv234 *arv) {
     }     
 };
 
-void imprimeArvore(arv234 *arv) {
-    if(!arv || !arv->raiz) return;
-    no234 *aux = 
-    while(aux->ocupacaoFilhos > 0) {
-
+void preOrdemRec(no234 *no) {
+    if (no == NULL) {
+        return;
     }
-};
+    
+    // Em uma árvore 2-3-4, o percurso pré-ordem segue o padrão:
+    // 1. Visita primeira chave
+    // 2. Percorre primeiro filho
+    // 3. Visita segunda chave (se existir)  
+    // 4. Percorre segundo filho (se existir)
+    // 5. Visita terceira chave (se existir)
+    // 6. Percorre terceiro filho (se existir)
+    // 7. Percorre quarto filho (se existir)
+    
+    for (int i = 0; i < no->ocupacaoChaves; i++) {
+        // Percorre filho à esquerda da chave atual
+        if (!no->folha && i < no->ocupacaoFilhos) {
+            preOrdemRec(no->vetFilho[i]);
+        }
+        
+        // Visita a chave atual
+        if (no->vetChaves[i] != INT_MIN) {
+            printf("%d ", no->vetChaves[i]);
+        }
+    }
+    
+    // Percorre o último filho (mais à direita)
+    if (!no->folha && no->ocupacaoFilhos > no->ocupacaoChaves) {
+        preOrdemRec(no->vetFilho[no->ocupacaoChaves]);
+    }
+}
+
+// Função principal para percurso pré-ordem
+void preOrdem(arv234 *arv) {
+    if (arv == NULL || arv->raiz == NULL) {
+        printf("Árvore vazia!\n");
+        return;
+    }
+    
+    printf("Percurso Pré-Ordem: ");
+    preOrdemRec(arv->raiz);
+    printf("\n");
+}
+
+void imprimirChavesNo(no234 *no) {
+    if (no == NULL) {
+        printf("[NULL]");
+        return;
+    }
+    
+    printf("[");
+    for (int i = 0; i < no->ocupacaoChaves; i++) {
+        if (i > 0) printf(",");
+        printf("%d", no->vetChaves[i]);
+    }
+    printf("]");
+}
+
+void imprimirPorNivel(arv234 *arv) {
+    if (arv == NULL || arv->raiz == NULL) {
+        printf("Árvore vazia!\n");
+        return;
+    }
+    
+    // Simulação de fila usando array (máximo 1000 nós)
+    no234 *fila[1000];
+    int niveis[1000];  // Armazena o nível de cada nó
+    int inicio = 0, fim = 0;
+    int nivelAtual = 0;
+    
+    // Inicia com a raiz
+    fila[fim] = arv->raiz;
+    niveis[fim] = 0;
+    fim++;
+    
+    printf("Árvore por níveis:\n");
+    printf("Nível 0: ");
+    
+    while (inicio < fim) {
+        no234 *noAtual = fila[inicio];
+        int nivelNo = niveis[inicio];
+        inicio++;
+        
+        // Se mudou de nível, imprime quebra de linha
+        if (nivelNo > nivelAtual) {
+            printf("\nNível %d: ", nivelNo);
+            nivelAtual = nivelNo;
+        }
+        
+        // Imprime nó atual
+        imprimirChavesNo(noAtual);
+        printf(" ");
+        
+        // Adiciona filhos à fila
+        if (!noAtual->folha) {
+            for (int i = 0; i < noAtual->ocupacaoFilhos; i++) {
+                if (noAtual->vetFilho[i] != NULL) {
+                    fila[fim] = noAtual->vetFilho[i];
+                    niveis[fim] = nivelNo + 1;
+                    fim++;
+                }
+            }
+        }
+    }
+    printf("\n");
+}
+
 
 void insereChave(int valor, arv234 *arv) {
     no234 *aux = arv->raiz;
@@ -207,6 +309,7 @@ void insereChave(int valor, arv234 *arv) {
     
     // Verificar se precisa dividir
     if (aux->ocupacaoChaves > MAX_CHAVES) {
+        printf("Iniciando split\n");
         split(aux, arv);
-    }
+    } 
 }
