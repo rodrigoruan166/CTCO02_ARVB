@@ -63,3 +63,6 @@ int encontraPredecessor(no234 *origem);
 Encontra o valor do sucessor para um dado nó origem
 */
 int encontraSucessor(no234 *origem);
+
+/*Percorre a árvore*/
+void imprimeArvore(arv234 *arv);
