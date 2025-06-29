@@ -60,3 +60,7 @@ void teste21();
 void teste22();
 
 void teste23();
+
+void teste24();
+
+void teste25();
