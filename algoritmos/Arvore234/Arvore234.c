@@ -46,6 +46,9 @@ struct NO {
 struct arv {
     no234 *raiz;
     int ordem;
+    int totalSplit;
+    int totalBorrow;
+    int totalMerge;
 };
 
 // Aloca o nó 
@@ -86,6 +89,7 @@ arv234 *alocaArvore() {
 
     // Inicialmente, o nó raiz é uma folha
     arv->raiz->folha = 1;
+    arv->totalBorrow = arv->totalMerge = arv->totalSplit = 0;
     arv->ordem = 4;
 
     return arv;
@@ -122,8 +126,27 @@ int getOcupacaoFilhos(no234 *no) {
     return no->ocupacaoFilhos;
 }
 
+int getTotalSplit(arv234 *a) {
+    if (!a)
+        return 0;
+    return a->totalSplit;
+}
+
+int getTotalBorrow(arv234 *a) {
+    if (!a)
+        return 0;
+    return a->totalBorrow;
+}
+
+int getTotalMerge(arv234 *a) {
+    if (!a)
+        return 0;
+    return a->totalMerge;
+}
+
 /* Split executa recursivamente caso o nó tenha ultrapassado o máximo de chaves permitidas. */
 no234 *split(no234 *noCheio, arv234 *arv) {
+    arv->totalSplit++;
     // Inserindo um elemento "fantasma", o nó fica com 4 elementos
     // O meio será o elemento da posição 1 ou 2, como escolhemos sempre o da esquerda, será 1
     int posicaoRisingNode = 1;
@@ -373,7 +396,8 @@ no234 *buscaNo(int valor, int *pos, int *posNo, arv234 *arv) {
     return aux;
 }
 
-void borrowLeft(no234 *aux, no234* irmaoEsq, int pos, int posNo) {
+void borrowLeft(arv234 *arv, no234 *aux, no234* irmaoEsq, int pos, int posNo) {
+    arv->totalBorrow++;
     int chaveIrmao = irmaoEsq->vetChaves[irmaoEsq->ocupacaoChaves-1];
     printf("> Chave do irmao encontrada: %d\n", chaveIrmao);
     int chavePai = aux->noPai->vetChaves[posNo-1];
@@ -409,7 +433,8 @@ void borrowLeft(no234 *aux, no234* irmaoEsq, int pos, int posNo) {
     irmaoEsq->ocupacaoChaves--;
 }
 
-void borrowRight(no234 *aux, no234* irmaoDir, int pos, int posNo) {
+void borrowRight(arv234 *arv, no234 *aux, no234* irmaoDir, int pos, int posNo) {
+    arv->totalBorrow++;
     int chaveIrmao = irmaoDir->vetChaves[0];
     printf("> Chave do irmao encontrada: %d\n", chaveIrmao);
     int chavePai = aux->noPai->vetChaves[posNo];
@@ -443,7 +468,8 @@ void borrowRight(no234 *aux, no234* irmaoDir, int pos, int posNo) {
     irmaoDir->ocupacaoChaves--;
 }
 
-void mergeLeft(no234 *aux, no234* irmaoEsq, int pos, int posNo) {
+void mergeLeft(arv234 *arv, no234 *aux, no234* irmaoEsq, int pos, int posNo) {
+    arv->totalMerge++;
     for(int i = 0; i < aux->noPai->ocupacaoChaves; i++)
         printf(" %d ", aux->noPai->vetChaves[i]);
                 
@@ -489,7 +515,8 @@ void mergeLeft(no234 *aux, no234* irmaoEsq, int pos, int posNo) {
     free(aux);
 }
 
-void mergeRight(no234 *aux, no234* irmaoDir, int pos, int posNo) {
+void mergeRight(arv234 *arv, no234 *aux, no234* irmaoDir, int pos, int posNo) {
+    arv->totalMerge++;
     for(int i = 0; i < aux->noPai->ocupacaoChaves; i++)
         printf(" %d ", aux->noPai->vetChaves[i]);
     
@@ -601,17 +628,17 @@ void ajustarParaCima(no234 *no, arv234 *arv) {
 
     if (irmaoEsq && irmaoEsq->ocupacaoChaves > MIN_CHAVES) {
         printf("Ajuste: emprestando da esquerda\n");
-        borrowLeft(no, irmaoEsq, 0, posNo);
+        borrowLeft(arv, no, irmaoEsq, 0, posNo);
     } else if (irmaoDir && irmaoDir->ocupacaoChaves > MIN_CHAVES) {
         printf("Ajuste: emprestando da direita\n");
-        borrowRight(no, irmaoDir, 0, posNo);
+        borrowRight(arv, no, irmaoDir, 0, posNo);
     } else if (irmaoEsq) {
         printf("Ajuste: merge com esquerda\n");
-        mergeLeft(no, irmaoEsq, 0, posNo);
+        mergeLeft(arv, no, irmaoEsq, 0, posNo);
         ajustarParaCima(pai, arv);
     } else if (irmaoDir) {
         printf("Ajuste: merge com direita\n");
-        mergeRight(no, irmaoDir, 0, posNo);
+        mergeRight(arv, no, irmaoDir, 0, posNo);
         ajustarParaCima(pai, arv);
     }
 }
@@ -655,22 +682,22 @@ void removeChave(int valor, arv234 *arv) {
             // Se for possível, EMPRESTAR DA ESQ
             if(irmaoEsq && irmaoEsq->ocupacaoChaves > MIN_CHAVES) {
                 printf("Emprestando do irmao da esquerda.\n");
-                borrowLeft(aux, irmaoEsq, pos, posNo);
+                borrowLeft(arv, aux, irmaoEsq, pos, posNo);
             }
             // Se for possível, EMPRESTAR DA DIR
             else if(irmaoDir && irmaoDir->ocupacaoChaves > MIN_CHAVES) {
                 printf("Emprestando do irmao da direita.\n");
-                borrowRight(aux, irmaoDir, pos, posNo);
+                borrowRight(arv, aux, irmaoDir, pos, posNo);
             }
             // Se for possível, MERGE DA ESQ
             else if(irmaoEsq) {
                 printf("Merging do irmao da esquerda.\n");
-                mergeLeft(aux, irmaoEsq, pos, posNo);
+                mergeLeft(arv, aux, irmaoEsq, pos, posNo);
             }
             // Se NÃO, MERGE DA DIR
             else {
                 printf("Merging do irmao da direita.\n");
-                mergeRight(aux, irmaoDir, pos, posNo);
+                mergeRight(arv, aux, irmaoDir, pos, posNo);
             }
         }
         if (aux->noPai && aux->noPai->ocupacaoChaves < MIN_CHAVES)
@@ -700,7 +727,7 @@ void removeChave(int valor, arv234 *arv) {
             pos = a->ocupacaoChaves-1;
             if(irmaoEsq && irmaoEsq->ocupacaoChaves > MIN_CHAVES) {
                 printf("Emprestando do irmao da esquerda.\n");
-                borrowLeft(a, irmaoEsq, pos, posNo);
+                borrowLeft(arv, a, irmaoEsq, pos, posNo);
                 //a->ocupacaoChaves++;
 
             }
@@ -708,19 +735,19 @@ void removeChave(int valor, arv234 *arv) {
             else if(irmaoDir && irmaoDir->ocupacaoChaves > MIN_CHAVES) {
                 printf("Emprestando do irmao da direita.\n");
                 printf("Posicao %d e posNo %d\n", pos, posNo);
-                borrowRight(a, irmaoDir, pos, posNo);
+                borrowRight(arv, a, irmaoDir, pos, posNo);
                 //a->ocupacaoChaves++;
             }
             else {
                 // Se for possível, MERGE DA ESQ
                 if(irmaoEsq) {
                     printf("Merging do irmao da esquerda.\n");
-                    mergeLeft(a, irmaoEsq, pos, posNo);
+                    mergeLeft(arv, a, irmaoEsq, pos, posNo);
                 }
                 // Se NÃO, MERGE DA DIR
                 else {
                     printf("Merging do irmao da direita.\n");
-                    mergeRight(a, irmaoDir, pos, posNo);
+                    mergeRight(arv, a, irmaoDir, pos, posNo);
                 }
 
                 if(aux->noPai && a->noPai->ocupacaoChaves < MIN_CHAVES)

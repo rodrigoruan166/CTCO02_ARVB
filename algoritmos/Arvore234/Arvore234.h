@@ -85,12 +85,20 @@ void imprimirChavesNo(no234 *no, int d);
 
 void imprimirPorNivel(arv234 *arv);
 
-void borrowLeft(no234 *aux, no234* irmaoEsq, int pos, int posNo);
+void borrowLeft(arv234 *arv, no234 *aux, no234* irmaoEsq, int pos, int posNo);
 
-void borrowRight(no234 *aux, no234* irmaoDir, int pos, int posNo);
+void borrowRight(arv234 *arv, no234 *aux, no234* irmaoDir, int pos, int posNo);
 
-void mergeLeft(no234 *aux, no234* irmaoEsq, int pos, int posNo);
+void mergeLeft(arv234 *arv, no234 *aux, no234* irmaoEsq, int pos, int posNo);
 
-void mergeRight(no234 *aux, no234* irmaoDir, int pos, int posNo);
+void mergeRight(arv234 *arv, no234 *aux, no234* irmaoDir, int pos, int posNo);
+
 void ajustarParaCima(no234 *no, arv234 *arv);
+
+int getTotalSplit(arv234 *a);
+
+int getTotalBorrow(arv234 *a);
+
+int getTotalMerge(arv234 *a);
+
 no234 *buscaNo(int valor, int *pos, int *posNo, arv234 *arv);
