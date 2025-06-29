@@ -302,6 +302,28 @@ void percorrePreOrdem(rb *T, noRB *aux)
     percorrePreOrdem(T, aux->dir);
 };
 
+// Percorre a árvore em inorder imprimindo chave e cor dos nós
+void percorreEmOrdem(rb *T, noRB *aux)
+{
+    if (!aux || aux == T->nil || !T)
+        return;
+
+    percorreEmOrdem(T, aux->esq);
+    printf("%d -- %c\n", aux->chave, aux->cor);
+    percorreEmOrdem(T, aux->dir);
+};
+
+// Percorre a árvore em posordem imprimindo chave e cor dos nós
+void percorrePosOrdem(rb *T, noRB *aux)
+{
+    if (!aux || aux == T->nil || !T)
+        return;
+
+    printf("%d -- %c\n", aux->chave, aux->cor);
+    percorrePosOrdem(T, aux->dir);
+    percorrePosOrdem(T, aux->esq);
+};
+
 // Retorna o ponteiro da raiz da árvore
 noRB *retornaRaiz(rb *T)
 {

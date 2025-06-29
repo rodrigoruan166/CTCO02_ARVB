@@ -94,6 +94,12 @@ void right_rotate(rb *T, noRB *x);
  */
 void percorrePreOrdem(rb *T, noRB *aux);
 
+// Percorre a árvore em inorder imprimindo chave e cor dos nós
+void percorreEmOrdem(rb *T, noRB *aux);
+
+// Percorre a árvore em posordem imprimindo chave e cor dos nós
+void percorrePosOrdem(rb *T, noRB *aux);
+
 /**
  * Retorna a raiz da árvore Rubro-Negra T.
  */
