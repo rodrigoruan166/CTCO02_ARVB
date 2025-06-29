@@ -49,6 +49,7 @@ struct arv {
     int totalSplit;
     int totalBorrow;
     int totalMerge;
+    int totalChaves;
     int alturaArv;
 };
 
@@ -90,7 +91,7 @@ arv234 *alocaArvore() {
 
     // Inicialmente, o nó raiz é uma folha
     arv->raiz->folha = 1;
-    arv->totalBorrow = arv->totalMerge = arv->totalSplit = 0;
+    arv->totalBorrow = arv->totalMerge = arv->totalSplit = arv->totalChaves = arv->alturaArv = 0;
     arv->ordem = 4;
 
     return arv;
@@ -143,6 +144,12 @@ int getTotalMerge(arv234 *a) {
     if (!a)
         return 0;
     return a->totalMerge;
+}
+
+int getTotalChaves(arv234 *a) {
+    if (!a)
+        return 0;
+    return a->totalChaves;
 }
 
 int atualizaAltura(arv234 *a) {
@@ -272,9 +279,9 @@ void imprimirPorNivel(arv234 *arv) {
 
     printf("kfdksfdsk\n");
 
-    no234 *fila[1000];
-    int niveis[1000];
-    int noRelativo[1000];
+    no234 **fila = (no234**) malloc(sizeof(no234*) * 100000);
+    int *niveis = (int*) malloc(sizeof(int) * 100000);
+    int *noRelativo = (int*) malloc(sizeof(int) * 100000);
     int inicio = 0, fim = 0;
     int nivelAtual = 0;
 
@@ -320,6 +327,7 @@ void imprimirPorNivel(arv234 *arv) {
         }
     }
 
+    free(niveis); free(fila); free(noRelativo);
     printf("\n");
 }
 
@@ -627,7 +635,7 @@ void removeChave(int valor, arv234 *arv) {
         printf("Chave não encontrada.\n");
         return;
     }
-        
+    arv->totalChaves--;
     if(aux->folha) {
         printf("Nó é folha\n");
 
@@ -762,5 +770,5 @@ void insereChave(int valor, arv234 *arv) {
     }
     
     atualizaAltura(arv);
-
+    arv->totalChaves++;
 }

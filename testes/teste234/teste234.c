@@ -565,47 +565,49 @@ void teste29(arv234 *arv)
     if (!arv)
         return;
 
-    // int qtyValores = 100000;
-    // int *chaves = geraAleatorios(qtyValores, time(NULL));
+    int qtyValores = 100000;
+    int t = 0;
+    int *chaves = geraAleatorios(qtyValores, time(NULL));
 
-    for (int i = 0; i < 100000; i++)
+    for (int i = 0; i < qtyValores; i++)
     {
-        insereChave(i, arv);
+        insereChave(chaves[i], arv);
     }
 
     imprimirPorNivel(arv);
+
 }
 
-const int NUMBER_OF_TEST_CASES = 28;
+const int NUMBER_OF_TEST_CASES = 29;
 f functions[] = {
-    // teste1,
-    // teste2,
-    // teste3,
-    // teste4,
-    // teste5,
-    // teste6,
-    // teste7,
-    // teste8,
-    // teste9,
-    // teste10,
-    // teste11,
-    // teste12,
-    // teste13,
-    // teste14,
-    // teste15,
-    // teste16,
-    // teste17,
-    // teste18,
-    // teste19,
-    // teste20,
-    // teste21,
-    // teste22,
-    // teste23,
-    // teste24,
-    // teste25,
-    // teste26,
-    // teste27,
-    // teste28,
+    teste1,
+    teste2,
+    teste3,
+    teste4,
+    teste5,
+    teste6,
+    teste7,
+    teste8,
+    teste9,
+    teste10,
+    teste11,
+    teste12,
+    teste13,
+    teste14,
+    teste15,
+    teste16,
+    teste17,
+    teste18,
+    teste19,
+    teste20,
+    teste21,
+    teste22,
+    teste23,
+    teste24,
+    teste25,
+    teste26,
+    teste27,
+    teste28,
     teste29
 };
 
@@ -617,7 +619,7 @@ int main(arv234 *arv)
         printf("\n\n ######################################################## CASO %d ########\n\n", i + 1);
         functions[i](arv);
 
-        printf("\n\n```\nTOTAL SPLIT %d \nTOTAL MERGE %d \nTOTAL BORROW %d\n ```", getTotalSplit(arv), getTotalMerge(arv), getTotalBorrow(arv));
+        printf("\n\n```\nTOTAL SPLIT %d \nTOTAL MERGE %d \nTOTAL BORROW %d\nTOTAL CHAVES %d\n ```", getTotalSplit(arv), getTotalMerge(arv), getTotalBorrow(arv), getTotalChaves(arv));
         free(arv);
     }
 

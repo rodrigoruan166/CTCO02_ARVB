@@ -82,6 +82,9 @@ int getOcupacaoChaves(no234 *no);
 /*Retorna número de filhos para um dado nó*/
 int getOcupacaoFilhos(no234 *no);
 
+/*Retorna número chaves inseridos na árvore*/
+int getTotalChaves(arv234 *arv);
+
 void imprimirChavesNo(no234 *no, int d);
 
 void imprimirPorNivel(arv234 *arv);

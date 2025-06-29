@@ -99,7 +99,8 @@ int *geraAleatorios(int tam, int semente)
         return NULL;
 
     for (int i = 0; i < tam; i++)
-        vetor[i] = rand() % tam;
+    // Para permitir valores superiores a 32768
+        vetor[i] = i + (rand() % tam);
 
     return vetor;
 }
