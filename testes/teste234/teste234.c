@@ -495,32 +495,46 @@ void teste24(arv234 *arv)
 
 void teste25(arv234 *arv)
 {
-    
-
     if (!arv)
         return;
 
-    int chaves[] = {10, 20, 30, 40, 50};
+    int chaves[] = {10,
+                    20,
+                    30,
+                    40,
+                    50,
+                    60,
+                    70,
+                    80,
+                    90,
+                    100};
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
         insereChave(chaves[i], arv);
     }
 
-    removeChave(10, arv);
-    removeChave(30, arv);
     removeChave(40, arv);
+    removeChave(70, arv);
+    removeChave(100, arv);
     removeChave(50, arv);
-    insereChave(10, arv);
-    insereChave(30, arv);
-    insereChave(40, arv);
-    insereChave(50, arv);
-    insereChave(60, arv);
+    removeChave(60, arv);
+    removeChave(20, arv);
 
+    int c[] = {85, 54, 68, 77, 74, 75, 73, 78, 79, 88, 92, 95, 99, 94, 100, 103, 105, 109, 111, 33, 34, 37};
+    for (int i = 0; i < sizeof(c) / sizeof(int); i++)
+    {
+        insereChave(c[i], arv);
+    }
+    
+    removeChave(68, arv);
+    removeChave(88, arv);
+    removeChave(79, arv);
+    removeChave(95, arv);
     imprimirPorNivel(arv);
 }
 
-const int NUMBER_OF_TEST_CASES = 24;
+const int NUMBER_OF_TEST_CASES = 25;
 f functions[] = {
     teste1,
     teste2,

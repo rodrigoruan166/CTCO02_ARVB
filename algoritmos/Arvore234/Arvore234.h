@@ -67,8 +67,6 @@ no234 *encontraSucessor(no234 *origem, int posElemento);
 /*Percorre a árvore*/
 void imprimeArvore(arv234 *arv);
 
-void preOrdemRec(no234 *no);
-
 /*Retorna o vetor de chaves para um dado nó*/
 int *getChaves(no234 *no);
 
@@ -83,8 +81,6 @@ int getOcupacaoChaves(no234 *no);
 
 /*Retorna número de filhos para um dado nó*/
 int getOcupacaoFilhos(no234 *no);
-
-void preOrdem(arv234 *arv);
 
 void imprimirChavesNo(no234 *no, int d);
 

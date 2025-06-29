@@ -250,50 +250,6 @@ no234 *split(no234 *noCheio, arv234 *arv) {
     }     
 };
 
-void preOrdemRec(no234 *no) {
-    if (no == NULL) {
-        return;
-    }
-    
-    // Em uma árvore 2-3-4, o percurso pré-ordem segue o padrão:
-    // 1. Visita primeira chave
-    // 2. Percorre primeiro filho
-    // 3. Visita segunda chave (se existir)  
-    // 4. Percorre segundo filho (se existir)
-    // 5. Visita terceira chave (se existir)
-    // 6. Percorre terceiro filho (se existir)
-    // 7. Percorre quarto filho (se existir)
-    
-    for (int i = 0; i < no->ocupacaoChaves; i++) {
-        // Percorre filho à esquerda da chave atual
-        if (!no->folha && i < no->ocupacaoFilhos) {
-            preOrdemRec(no->vetFilho[i]);
-        }
-        
-        // Visita a chave atual
-        if (no->vetChaves[i] != INT_MIN) {
-            printf("%d ", no->vetChaves[i]);
-        }
-    }
-    
-    // Percorre o último filho (mais à direita)
-    if (!no->folha && no->ocupacaoFilhos > no->ocupacaoChaves) {
-        preOrdemRec(no->vetFilho[no->ocupacaoChaves]);
-    }
-}
-
-// Função principal para percurso pré-ordem
-void preOrdem(arv234 *arv) {
-    if (arv == NULL || arv->raiz == NULL) {
-        printf("Árvore vazia!\n");
-        return;
-    }
-    
-    printf("Percurso Pré-Ordem: ");
-    preOrdemRec(arv->raiz);
-    printf("\n");
-}
-
 void imprimirChavesNo(no234 *no, int d) {
     if (no == NULL) {
         printf("[NULL]");
@@ -651,12 +607,15 @@ void ajustarParaCima(no234 *no, arv234 *arv) {
     } else if (irmaoEsq) {
         printf("Ajuste: merge com esquerda\n");
         mergeLeft(arv, no, irmaoEsq, 0, posNo);
-        ajustarParaCima(pai, arv);
     } else if (irmaoDir) {
         printf("Ajuste: merge com direita\n");
         mergeRight(arv, no, irmaoDir, 0, posNo);
-        ajustarParaCima(pai, arv);
     }
+
+    if (pai && pai->ocupacaoChaves < MIN_CHAVES)
+            ajustarParaCima(pai, arv);
+
+    atualizaAltura(arv);
 }
 
 void removeChave(int valor, arv234 *arv) {
