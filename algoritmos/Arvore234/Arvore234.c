@@ -491,7 +491,6 @@ no234 *encontraPredecessor(no234 *origem, int posElemento, int *posicaoRel) {
         aux = aux->vetFilho[aux->ocupacaoFilhos-1];
     }
         
-
     return aux;
 };
 
@@ -560,7 +559,6 @@ void ajustarParaCima(no234 *no, arv234 *arv) {
     }
 }
 
-
 void removeChave(int valor, arv234 *arv) {
     // Faz uma busca para encontrar o nó em que o valor está.
     printf(">>>>>>>>>>>>> TENTANDO TIRAR %d <<<<<<<<<<<<<<<<<\n", valor);
@@ -619,7 +617,7 @@ void removeChave(int valor, arv234 *arv) {
             }
         }
 
-        if(aux->noPai->ocupacaoChaves < MIN_CHAVES)
+        if(aux->noPai && aux->noPai->ocupacaoChaves < MIN_CHAVES)
             ajustarParaCima(aux->noPai, arv);
     }
     
@@ -670,7 +668,7 @@ void removeChave(int valor, arv234 *arv) {
                 }
             }
             
-            if(a->noPai->ocupacaoChaves < MIN_CHAVES)
+            if(aux->noPai && a->noPai->ocupacaoChaves < MIN_CHAVES)
                 ajustarParaCima(a->noPai, arv);
         }
 
