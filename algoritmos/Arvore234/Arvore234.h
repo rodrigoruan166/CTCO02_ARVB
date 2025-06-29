@@ -69,14 +69,19 @@ void imprimeArvore(arv234 *arv);
 
 void preOrdemRec(no234 *no);
 
+/*Retorna o vetor de chaves para um dado nó*/
 int *getChaves(no234 *no);
 
+/*Retorna a raiz*/
 no234 *getRaiz(arv234 *arv);
 
+/*Retorna o vetor de filhos para um dado nó*/
 no234 **getFilhos(no234 *no);
 
+/*Retorna número de chaves para um dado nó*/
 int getOcupacaoChaves(no234 *no);
 
+/*Retorna número de filhos para um dado nó*/
 int getOcupacaoFilhos(no234 *no);
 
 void preOrdem(arv234 *arv);
@@ -85,22 +90,33 @@ void imprimirChavesNo(no234 *no, int d);
 
 void imprimirPorNivel(arv234 *arv);
 
+/*Empresta do irmão da esquerda para o nó desbalanceado*/
 void borrowLeft(arv234 *arv, no234 *aux, no234* irmaoEsq, int pos, int posNo);
 
+/*Empresta do irmão da direita para o nó desbalanceado*/
 void borrowRight(arv234 *arv, no234 *aux, no234* irmaoDir, int pos, int posNo);
 
+/*Realiza o merge do irmão da esquerda para o nó desbalanceado*/
 void mergeLeft(arv234 *arv, no234 *aux, no234* irmaoEsq, int pos, int posNo);
 
+/*Realiza o merge do irmão da direita para o nó desbalanceado*/
 void mergeRight(arv234 *arv, no234 *aux, no234* irmaoDir, int pos, int posNo);
 
+/*Verifica o pai do nó que estava desbalanceado para balancear recursivamente*/
 void ajustarParaCima(no234 *no, arv234 *arv);
 
+/*Retorna o total de splits realizados naquela árvore*/
 int getTotalSplit(arv234 *a);
 
+/*Retorna o total de operações borrow realizados naquela árvore*/
 int getTotalBorrow(arv234 *a);
 
+/*Retorna o total de merges realizados naquela árvore*/
 int getTotalMerge(arv234 *a);
 
+/*Retorna a altura e atualiza na estrutura da árvore*/
 int atualizaAltura(arv234 *a);
 
+/*Retorna o nó que contém o valor do argumento. Atualiza pos como a posição do 
+  elemento no nó e posNo com a posição relativa em relação ao seu pai */
 no234 *buscaNo(int valor, int *pos, int *posNo, arv234 *arv);
