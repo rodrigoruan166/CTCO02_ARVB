@@ -14,19 +14,10 @@ int main() {
         insereChave(ele[i], T2);
 
     imprimirPorNivel(T2);
-    removeChave(11, T2);
-    imprimirPorNivel(T2);
-    removeChave(7, T2);
-    imprimirPorNivel(T2);
     removeChave(14, T2);
     imprimirPorNivel(T2);
-    removeChave(18, T2);
-    imprimirPorNivel(T2);
-    removeChave(19, T2);
-    imprimirPorNivel(T2);
-    removeChave(16, T2);
-    imprimirPorNivel(T2);
-    removeChave(12, T2);
-    imprimirPorNivel(T2);
+    
     return 0;
 }
+
+//18;14;11;4;12;16;19;20;7

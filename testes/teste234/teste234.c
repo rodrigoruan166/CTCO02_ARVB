@@ -337,7 +337,7 @@ void teste17()
     {
         insereChave(chaves[i], arv);
     }
-
+    imprimirPorNivel(arv);
     removeChave(20, arv);
     imprimirPorNivel(arv);
 }
@@ -424,35 +424,8 @@ void teste21()
     imprimirPorNivel(arv);
 }
 
-void teste22()
-{
-    arv234 *arv = alocaArvore();
-
-    if (!arv)
-        return;
-
-    int chaves[] = {10, 20, 30, 40, 50};
-
-    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
-    {
-        insereChave(chaves[i], arv);
-    }
-
-    removeChave(10, arv);
-    removeChave(30, arv);
-    removeChave(40, arv);
-    removeChave(50, arv);
-    insereChave(10, arv);
-    insereChave(30, arv);
-    insereChave(40, arv);
-    insereChave(50, arv);
-    insereChave(60, arv);
-
-    imprimirPorNivel(arv);
-}
-
 // 18;14;11;4;12;16;19;20;7;21;22
-void teste23()
+void teste22()
 {
     arv234 *arv = alocaArvore();
 
@@ -479,7 +452,7 @@ void teste23()
 }
 
 // 17;20;25;23;12;115;55;47;31;21;43;44;46
-void teste24()
+void teste23()
 {
     arv234 *arv = alocaArvore();
 
@@ -492,6 +465,7 @@ void teste24()
     {
         insereChave(chaves[i], arv);
     }
+    imprimirPorNivel(arv);
 
     removeChave(12, arv);
     removeChave(21, arv);
@@ -499,7 +473,7 @@ void teste24()
     imprimirPorNivel(arv);
 }
 
-void teste25()
+void teste24()
 {
     arv234 *arv = alocaArvore();
 
@@ -519,40 +493,67 @@ void teste25()
     imprimirPorNivel(arv);
 }
 
-const int NUMBER_OF_TEST_CASES = 1;
+void teste25()
+{
+    arv234 *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {10, 20, 30, 40, 50};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    removeChave(10, arv);
+    removeChave(30, arv);
+    removeChave(40, arv);
+    removeChave(50, arv);
+    insereChave(10, arv);
+    insereChave(30, arv);
+    insereChave(40, arv);
+    insereChave(50, arv);
+    insereChave(60, arv);
+
+    imprimirPorNivel(arv);
+}
+
+const int NUMBER_OF_TEST_CASES = 24;
 f functions[] = {
-    //teste1,
-    //teste2,
-    //teste3,
-    //teste4,
-    // teste5,
-    // teste6,
-    // teste7,
-    //teste8,
-    // teste9,
-    //teste10,
-    // teste11,
-    // teste12,
-    // teste13,
-    //teste14,
-    // teste15,
-    // teste16,
-    // teste17,
-    // teste18,
-    // teste19,
-    // teste20,
-    // teste21,
-    // teste22,
-    // teste23,
-    //teste24
-    //teste25
+    teste1,
+    teste2,
+    teste3,
+    teste4,
+     teste5,
+     teste6,
+     teste7,
+    teste8,
+     teste9,
+    teste10,
+     teste11,
+     teste12,
+     teste13,
+    teste14,
+     teste15,
+     teste16,
+     teste17,
+     teste18,
+     teste19,
+     teste20,
+     teste21,
+     teste22,
+     teste23,
+    teste24,
+    teste25
 };
 
 int main()
 {
     for (int i = 0; i < NUMBER_OF_TEST_CASES; i++)
     {
-        printf(" ------ CASO %d ------\n", i + 1);
+        printf("\n\n ######## CASO %d ########\n\n", i + 1);
         functions[i]();
     }
 

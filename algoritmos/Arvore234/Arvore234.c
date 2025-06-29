@@ -355,6 +355,7 @@ void borrowLeft(no234 *aux, no234* irmaoEsq, int pos, int posNo) {
     aux->vetChaves[0] = chavePai;
 
     if (aux->ocupacaoChaves == 0) { // CASO DA INSERCAO
+        printf("Incrementando ocupacao chaves\n");
         aux->ocupacaoChaves++;
     }
 
@@ -385,6 +386,7 @@ void borrowRight(no234 *aux, no234* irmaoDir, int pos, int posNo) {
 
     aux->vetChaves[0] = chavePai;
     if (aux->ocupacaoChaves == 0) { // CASO DA INSERCAO
+        printf("Incrementando ocupacao chaves\n");
         aux->ocupacaoChaves++;
     }
 
@@ -668,7 +670,7 @@ void removeChave(int valor, arv234 *arv) {
             if(irmaoEsq && irmaoEsq->ocupacaoChaves > MIN_CHAVES) {
                 printf("Emprestando do irmao da esquerda.\n");
                 borrowLeft(a, irmaoEsq, pos, posNo);
-                a->ocupacaoChaves++;
+                //a->ocupacaoChaves++;
 
             }
             // Se for possível, EMPRESTAR DA DIR
@@ -676,7 +678,7 @@ void removeChave(int valor, arv234 *arv) {
                 printf("Emprestando do irmao da direita.\n");
                 printf("Posicao %d e posNo %d\n", pos, posNo);
                 borrowRight(a, irmaoDir, pos, posNo);
-                a->ocupacaoChaves++;
+                //a->ocupacaoChaves++;
             }
             else {
                 // Se for possível, MERGE DA ESQ
