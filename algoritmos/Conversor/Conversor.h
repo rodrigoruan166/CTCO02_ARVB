@@ -10,3 +10,10 @@
  *
  * Data: 19/06/2025
  ******************************************************************************/
+
+#include "../Arvore234/Arvore234.h"
+#include "../RubroNegra/RubroNegra.h"
+
+noRB* criaNoRB(int chave, char cor, rb *arvore);
+
+noRB* convert234ToRB(no234 *node, rb *arvore);

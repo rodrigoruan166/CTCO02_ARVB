@@ -31,7 +31,7 @@ struct NO
 };
 
 // Aloca e inicializa a estrutura da árvore Rubro-Negra
-rb *alocaArvore()
+rb *alocaArvoreRb()
 {
     rb *arv = (rb *)malloc(sizeof(rb));
 
@@ -51,8 +51,67 @@ rb *alocaArvore()
     return arv;
 }
 
+void setRaizRb(rb *T, noRB *raiz) {
+    T->raiz = raiz;
+}
+
+noRB *getRaizRb(rb *arv) {
+    if (!arv)
+        return arv->nil;
+
+    return arv->raiz;
+}
+
+void setDireita(noRB* no, noRB* filho) {
+    if (no) no->dir = filho;
+}
+
+void setEsquerda(noRB* no, noRB* filho) {
+    if (no) no->esq = filho;
+}
+
+void setPai(noRB* no, noRB* pai) {
+    if (no) no->pai = pai;
+}
+
+noRB* getEsquerda(noRB* no) {
+    return no ? no->esq : NULL;
+}
+
+noRB* getDireita(noRB* no) {
+    return no ? no->dir : NULL;
+}
+
+noRB* getPai(noRB* no) {
+    return no ? no->pai : NULL;
+}
+
+char getCor(noRB* no) {
+    return no ? no->cor : 'P'; // Considere preto por padrão
+}
+
+int getChave(noRB* no) {
+    return no ? no->chave : -1;
+}
+
+noRB *retornaSentinelaRb(rb *arv) {
+    if (!arv)
+        return NULL;
+
+    return arv->nil;
+}
+
+// Altera a cor do nó rubro negro
+noRB *alterarCorNoRb(noRB *no, char cor) {
+    if (!no)
+        return NULL;
+
+    no->cor = cor;
+    return no;
+}
+
 // Aloca e inicializa um novo nó com a chave fornecida
-noRB *alocaNo(rb *arv, int chave)
+noRB *alocaNoRb(rb *arv, int chave)
 {
     if (!arv)
         return NULL;

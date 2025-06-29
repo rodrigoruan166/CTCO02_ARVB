@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "./algoritmos/Arvore234/Arvore234.h"
+#include "./algoritmos/Conversor/Conversor.h"
 
 int main() {
     arv234 *T2 = alocaArvore();
@@ -13,9 +14,12 @@ int main() {
     for(int i = 0; i < tam; i++)
         insereChave(ele[i], T2);
 
-    imprimirPorNivel(T2);
-    removeChave(14, T2);
-    imprimirPorNivel(T2);
+    printf("TEST\n");
+
+    rb *arvRb = alocaArvoreRb();
+    setRaizRb(arvRb, convert234ToRB(getRaiz(T2), arvRb));
+
+    percorrePreOrdem(arvRb, getRaizRb(arvRb));
     
     return 0;
 }

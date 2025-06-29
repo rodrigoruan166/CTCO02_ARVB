@@ -25,7 +25,7 @@ f functions[] = {
 
 void teste1()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -34,7 +34,7 @@ void teste1()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -43,7 +43,7 @@ void teste1()
 
 void teste2()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -52,7 +52,7 @@ void teste2()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -61,7 +61,7 @@ void teste2()
 
 void teste3()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -70,7 +70,7 @@ void teste3()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -79,7 +79,7 @@ void teste3()
 
 void teste4()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -88,7 +88,7 @@ void teste4()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -98,7 +98,7 @@ void teste4()
 
 void teste5()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -107,7 +107,7 @@ void teste5()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -117,7 +117,7 @@ void teste5()
 
 void teste6()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -126,7 +126,7 @@ void teste6()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -136,7 +136,7 @@ void teste6()
 
 void teste7()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -145,7 +145,7 @@ void teste7()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -156,7 +156,7 @@ void teste7()
 
 void teste8()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -165,7 +165,7 @@ void teste8()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -175,7 +175,7 @@ void teste8()
 
 void teste9()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -184,7 +184,7 @@ void teste9()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -194,7 +194,7 @@ void teste9()
 
 void teste10()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -203,7 +203,7 @@ void teste10()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -214,7 +214,7 @@ void teste10()
 
 void teste11()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -223,7 +223,7 @@ void teste11()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -233,7 +233,7 @@ void teste11()
 
 void teste12()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -242,7 +242,7 @@ void teste12()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -254,7 +254,7 @@ void teste12()
 
 void teste13()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -263,7 +263,7 @@ void teste13()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -273,7 +273,7 @@ void teste13()
 
 void teste14()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -282,7 +282,7 @@ void teste14()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 
@@ -292,7 +292,7 @@ void teste14()
 
 void teste15()
 {
-    rb *arv = alocaArvore();
+    rb *arv = alocaArvoreRb();
 
     if (!arv)
         return;
@@ -301,7 +301,7 @@ void teste15()
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
-        noRB *novoNo = alocaNo(arv, chaves[i]);
+        noRB *novoNo = alocaNoRb(arv, chaves[i]);
         insereNo(arv, novoNo);
     }
 

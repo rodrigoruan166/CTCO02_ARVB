@@ -69,6 +69,16 @@ void imprimeArvore(arv234 *arv);
 
 void preOrdemRec(no234 *no);
 
+int *getChaves(no234 *no);
+
+no234 *getRaiz(arv234 *arv);
+
+no234 **getFilhos(no234 *no);
+
+int getOcupacaoChaves(no234 *no);
+
+int getOcupacaoFilhos(no234 *no);
+
 void preOrdem(arv234 *arv);
 
 void imprimirChavesNo(no234 *no, int d);

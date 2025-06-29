@@ -20,13 +20,41 @@ typedef struct RB rb;
 /**
  * Aloca e inicializa uma nova árvore Rubro-Negra com o nó nil.
  */
-rb *alocaArvore();
+rb *alocaArvoreRb();
 
 /**
  * Aloca e inicializa um novo nó com a chave fornecida.
  * O nó é inicialmente colorido como vermelho.
  */
-noRB *alocaNo(rb *arv, int chave);
+noRB *alocaNoRb(rb *arv, int chave);
+
+noRB *getRaizRb(rb *arv);
+
+void setRaizRb(rb *T, noRB *raiz);
+
+// Retorna o ponteiro para o filho esquerdo do nó RB
+noRB* getEsquerda(noRB* no);
+
+// Retorna o ponteiro para o filho direito do nó RB
+noRB* getDireita(noRB* no);
+
+void setDireita(noRB* no, noRB* filho);
+
+void setEsquerda(noRB* no, noRB* filho);
+
+void setPai(noRB* no, noRB* pai);
+
+noRB* getPai(noRB* no);
+
+char getCor(noRB* no);
+
+int getChave(noRB* no);
+
+// Altera a cor do nó rubro negro
+noRB *alterarCorNoRb(noRB *no, char cor);
+
+// Retorna sentinela RB
+noRB *retornaSentinelaRb(rb *arv);
 
 /**
  * Insere o nó z na árvore Rubro-Negra T, mantendo suas propriedades.

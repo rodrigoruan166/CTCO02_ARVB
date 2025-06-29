@@ -91,6 +91,37 @@ arv234 *alocaArvore() {
     return arv;
 }
 
+int *getChaves(no234 *no) {
+    if (!no)
+        return NULL;
+    return no->vetChaves;
+}
+
+no234 **getFilhos(no234 *no) {
+    if (!no)
+        return NULL;
+    return no->vetFilho;
+}
+
+no234 *getRaiz(arv234 *arv) {
+    if (!arv)
+        return NULL;
+
+    return arv->raiz;
+}
+
+int getOcupacaoChaves(no234 *no) {
+    if (!no)
+        return 0;
+    return no->ocupacaoChaves;
+}
+
+int getOcupacaoFilhos(no234 *no) {
+    if (!no)
+        return 0;
+    return no->ocupacaoFilhos;
+}
+
 /* Split executa recursivamente caso o nó tenha ultrapassado o máximo de chaves permitidas. */
 no234 *split(no234 *noCheio, arv234 *arv) {
     // Inserindo um elemento "fantasma", o nó fica com 4 elementos
