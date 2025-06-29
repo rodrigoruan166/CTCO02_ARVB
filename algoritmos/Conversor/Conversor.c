@@ -41,7 +41,7 @@ noRB* convert234ToRB(no234 *node, rb *arvore) {
 
         return raiz;
     } else if (ocupacao == 2) {
-        // Nó 3 → preto com filho vermelho à esquerda
+        // Nó 3 → preto com filho vermelho à direita
         noRB *raiz = criaNoRB(chaves[0], 'P', arvore);
         noRB *filhoDir = criaNoRB(chaves[1], 'V', arvore);
 
