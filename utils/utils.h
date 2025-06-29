@@ -12,3 +12,27 @@
  *
  * Data: 19/06/2025
  ******************************************************************************/
+
+/* Aloca um vetor de tamanho @tam */
+int *alocaVetor(int tam);
+
+/*O sistema deve gerar conjuntos de dados ordenados de forma crescente e
+decrescente. Para tanto, deve haver uma função com a assinatura abaixo, onde
+tam é a quantidade de elementos e ordem define o tipo de ordenação: 0 para
+ordem crescente e 1 para ordem decrescente. A função retorna o vetor
+previamente preenchido.*/
+int *geraOrdenados(int tam, int ordem);
+
+/*O sistema deve gerar conjuntos de dados quase ordenados, que contém cerca
+de 10% dos dados desordenados 90% ordenados. Para tanto, deve haver uma
+função com a assinatura abaixo, onde tam é a quantidade de elementos que
+deve ser gerada e a porcentagem é o inteiro que determina a porcentagem de
+dados desordenados. A função retorna o vetor previamente preenchido.*/
+int *geraQuaseOrdenados(int tam, int porcentagem);
+
+/*O sistema deve gerar conjuntos de dados aleatórios de diferentes tamanhos.
+Para tanto, deve haver uma função com a assinatura abaixo, onde tam é a
+quantidade de elementos que deve ser gerada e a semente é o inteiro que
+permite que esse conjunto de dados seja reproduzido posteriormente. A função
+retorna o vetor previamente preenchido.*/
+int *geraAleatorios(int tam, int semente);
