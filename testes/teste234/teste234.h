@@ -64,3 +64,11 @@ void teste23();
 void teste24();
 
 void teste25();
+
+void teste26();
+
+void teste27();
+
+void teste28();
+
+void teste29();

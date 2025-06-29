@@ -15,12 +15,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "../../algoritmos/Arvore234/Arvore234.h"
 #include "./teste234.h"
+#include "../../utils/utils.h"
 
 void teste1(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -38,7 +39,6 @@ void teste1(arv234 *arv)
 
 void teste2(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -57,12 +57,11 @@ void teste2(arv234 *arv)
 // PEGA SUCESSOR PARA DAR REPLACE NO ELEMENTO EXCLUIDO
 void teste3(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
 
-    //1;2;3;4;5
+    // 1;2;3;4;5
     int chaves[] = {1, 2, 3, 4, 5};
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
@@ -77,7 +76,6 @@ void teste3(arv234 *arv)
 // REMOVE DO FOLHA do meio, KEYS > MIN_KEYS
 void teste4(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -96,7 +94,6 @@ void teste4(arv234 *arv)
 // REMOVE DO FOLHA do canto esquerdo, KEYS > MIN_KEYS
 void teste5(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -115,7 +112,6 @@ void teste5(arv234 *arv)
 // REMOVE DO FOLHA do canto direito, KEYS > MIN_KEYS
 void teste6(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -134,7 +130,6 @@ void teste6(arv234 *arv)
 // REMOVE FOLHA COM MERGE À DIREITA
 void teste7(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -154,7 +149,6 @@ void teste7(arv234 *arv)
 // 10;9;8;6;5;4;3
 void teste8(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -174,7 +168,6 @@ void teste8(arv234 *arv)
 // 5;10;20;30;40;50
 void teste9(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -195,7 +188,6 @@ void teste9(arv234 *arv)
 // 5;10;20;30;40;50
 void teste10(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -214,7 +206,6 @@ void teste10(arv234 *arv)
 
 void teste11(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -234,7 +225,6 @@ void teste11(arv234 *arv)
 // Inserção em nó folha sem split
 void teste12(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -252,7 +242,6 @@ void teste12(arv234 *arv)
 // Inserção em nó gerando split na folha
 void teste13(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -270,7 +259,6 @@ void teste13(arv234 *arv)
 // Inserção causa split em folha e propagação para raiz
 void teste14(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -289,7 +277,6 @@ void teste14(arv234 *arv)
 // Folha faz split e o pai tem 3 chaves
 void teste15(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -307,7 +294,6 @@ void teste15(arv234 *arv)
 // Remoção de uma chave de um nó folha com mais de 1 chave
 void teste16(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -326,7 +312,6 @@ void teste16(arv234 *arv)
 // Remoção de uma chave de um nó interno (redistribuição)
 void teste17(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -345,7 +330,6 @@ void teste17(arv234 *arv)
 // Remoção de nó folha com 1 chave, merge com pai
 void teste18(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -365,7 +349,6 @@ void teste18(arv234 *arv)
 // Remoção de nó folha com 1 chave, merge com pai
 void teste19(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -385,7 +368,6 @@ void teste19(arv234 *arv)
 // Remoção da última chave da raiz (altura diminui)
 void teste20(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -406,7 +388,6 @@ void teste20(arv234 *arv)
 // Remoção da última chave da raiz (altura diminui)
 void teste21(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -427,7 +408,6 @@ void teste21(arv234 *arv)
 // 18;14;11;4;12;16;19;20;7;21;22
 void teste22(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -454,7 +434,6 @@ void teste22(arv234 *arv)
 // 17;20;25;23;12;115;55;47;31;21;43;44;46
 void teste23(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
@@ -475,12 +454,11 @@ void teste23(arv234 *arv)
 
 void teste24(arv234 *arv)
 {
-    
 
     if (!arv)
         return;
 
-    //3;4;5;2;1
+    // 3;4;5;2;1
     int chaves[] = {3, 4, 5, 2, 1};
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
@@ -534,33 +512,101 @@ void teste25(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-const int NUMBER_OF_TEST_CASES = 25;
+void teste26(arv234 *arv)
+{
+    if (!arv)
+        return;
+
+    int qtyValores = 100;
+    int *chaves = geraAleatorios(qtyValores, time(NULL));
+
+    for (int i = 0; i < qtyValores; i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    imprimirPorNivel(arv);
+}
+
+void teste27(arv234 *arv)
+{
+    if (!arv)
+        return;
+
+    int qtyValores = 1000;
+    int *chaves = geraAleatorios(qtyValores, time(NULL));
+
+    for (int i = 0; i < qtyValores; i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    imprimirPorNivel(arv);
+}
+
+void teste28(arv234 *arv)
+{
+    if (!arv)
+        return;
+
+    int qtyValores = 10000;
+    int *chaves = geraAleatorios(qtyValores, time(NULL));
+
+    for (int i = 0; i < qtyValores; i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    imprimirPorNivel(arv);
+}
+
+void teste29(arv234 *arv)
+{
+    if (!arv)
+        return;
+
+    // int qtyValores = 100000;
+    // int *chaves = geraAleatorios(qtyValores, time(NULL));
+
+    for (int i = 0; i < 100000; i++)
+    {
+        insereChave(i, arv);
+    }
+
+    imprimirPorNivel(arv);
+}
+
+const int NUMBER_OF_TEST_CASES = 28;
 f functions[] = {
-    teste1,
-    teste2,
-    teste3,
-    teste4,
-    teste5,
-    teste6,
-    teste7,
-    teste8,
-    teste9,
-    teste10,
-    teste11,
-    teste12,
-    teste13,
-    teste14,
-    teste15,
-    teste16,
-    teste17,
-    teste18,
-    teste19,
-    teste20,
-    teste21,
-    teste22,
-    teste23,
-    teste24,
-    teste25
+    // teste1,
+    // teste2,
+    // teste3,
+    // teste4,
+    // teste5,
+    // teste6,
+    // teste7,
+    // teste8,
+    // teste9,
+    // teste10,
+    // teste11,
+    // teste12,
+    // teste13,
+    // teste14,
+    // teste15,
+    // teste16,
+    // teste17,
+    // teste18,
+    // teste19,
+    // teste20,
+    // teste21,
+    // teste22,
+    // teste23,
+    // teste24,
+    // teste25,
+    // teste26,
+    // teste27,
+    // teste28,
+    teste29
 };
 
 int main(arv234 *arv)
