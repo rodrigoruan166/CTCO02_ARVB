@@ -25,6 +25,7 @@ void teste1()
     if (!arv)
         return;
 
+    // 10;20;30;40;50;60;70;80;90;100
     int chaves[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
@@ -42,6 +43,7 @@ void teste2()
     if (!arv)
         return;
 
+    // 5;3;21;9;1;13;2;7;10;12;4;8
     int chaves[] = {5, 3, 21, 9, 1, 13, 2, 7, 10, 12, 4, 8};
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
@@ -60,7 +62,8 @@ void teste3()
     if (!arv)
         return;
 
-    int chaves[] = {1,2,3,4,5};
+    //1;2;3;4;5
+    int chaves[] = {1, 2, 3, 4, 5};
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
@@ -79,7 +82,7 @@ void teste4()
     if (!arv)
         return;
 
-    int chaves[] = {1,2,3};
+    int chaves[] = {1, 2, 3};
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
@@ -98,7 +101,7 @@ void teste5()
     if (!arv)
         return;
 
-    int chaves[] = {1,2,3};
+    int chaves[] = {1, 2, 3};
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
@@ -117,7 +120,7 @@ void teste6()
     if (!arv)
         return;
 
-    int chaves[] = {1,2,3};
+    int chaves[] = {1, 2, 3};
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
@@ -136,7 +139,7 @@ void teste7()
     if (!arv)
         return;
 
-    int chaves[] = {1,2,3,4};
+    int chaves[] = {1, 2, 3, 4};
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
     {
@@ -470,12 +473,54 @@ void teste23()
     imprimirPorNivel(arv);
 }
 
-const int NUMBER_OF_TEST_CASES = 23;
+// 17;20;25;23;12;115;55;47;31;21;43;44;46
+void teste24()
+{
+    arv234 *arv = alocaArvore();
+
+    if (!arv)
+        return;
+
+    int chaves[] = {17, 20, 25, 23, 12, 115, 55, 47, 31, 21, 43, 44, 46};
+
+    for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    removeChave(12, arv);
+    removeChave(21, arv);
+    removeChave(17, arv);
+    imprimirPorNivel(arv);
+}
+
+const int NUMBER_OF_TEST_CASES = 1;
 f functions[] = {
-    teste1, teste2, teste3, teste4, teste5, teste6,
-    teste7, teste8, teste9, teste10, teste11, teste12,
-    teste13, teste14, teste15, teste16, teste17, teste18,
-    teste19, teste20, teste21, teste22, teste23};
+    //teste1,
+    //teste2,
+    teste3,
+    // teste4,
+    // teste5,
+    // teste6,
+    // teste7,
+    // teste8,
+    // teste9,
+    // teste10,
+    // teste11,
+    // teste12,
+    // teste13,
+    // teste14,
+    // teste15,
+    // teste16,
+    // teste17,
+    // teste18,
+    // teste19,
+    // teste20,
+    // teste21,
+    // teste22,
+    // teste23,
+    //teste24
+};
 
 int main()
 {

@@ -345,35 +345,70 @@ no234 *buscaNo(int valor, int *pos, int *posNo, arv234 *arv) {
 void borrowLeft(no234 *aux, no234* irmaoEsq, int pos, int posNo) {
     int chaveIrmao = irmaoEsq->vetChaves[irmaoEsq->ocupacaoChaves-1];
     printf("> Chave do irmao encontrada: %d\n", chaveIrmao);
-    irmaoEsq->vetChaves[irmaoEsq->ocupacaoChaves-1] = INT_MIN;
     int chavePai = aux->noPai->vetChaves[posNo-1];
     printf("> Chave do PAI encontrada (pos: %d): %d\n", posNo, chavePai);
 
-    // Desce o pai para o nó removido
-    aux->vetChaves[pos] = chavePai;
-    // Sobe o "emprestado" do irmão para o pai
+    // Deslocar chaves no nó atual para abrir espaço
+    for (int i = aux->ocupacaoChaves; i > 0; i--) {
+        aux->vetChaves[i] = aux->vetChaves[i-1];
+    }
+    // Desce o pai para o nó atual
+    aux->vetChaves[0] = chavePai;
+    aux->ocupacaoChaves++;
+
+    // Sobe a chave do irmão para o pai
     aux->noPai->vetChaves[posNo-1] = chaveIrmao;
 
+    // Se não for folha, mover o filho correspondente
+    if (!aux->folha) {
+        for (int i = aux->ocupacaoFilhos; i > 0; i--) {
+            aux->vetFilho[i] = aux->vetFilho[i-1];
+        }
+        aux->vetFilho[0] = irmaoEsq->vetFilho[irmaoEsq->ocupacaoFilhos-1];
+        if (aux->vetFilho[0]) {
+            aux->vetFilho[0]->noPai = aux;
+        }
+        aux->ocupacaoFilhos++;
+        irmaoEsq->vetFilho[irmaoEsq->ocupacaoFilhos-1] = NULL;
+        irmaoEsq->ocupacaoFilhos--;
+    }
+
+    irmaoEsq->vetChaves[irmaoEsq->ocupacaoChaves-1] = INT_MIN;
     irmaoEsq->ocupacaoChaves--;
-};
+}
 
 void borrowRight(no234 *aux, no234* irmaoDir, int pos, int posNo) {
     int chaveIrmao = irmaoDir->vetChaves[0];
     printf("> Chave do irmao encontrada: %d\n", chaveIrmao);
-    irmaoDir->vetChaves[0] = INT_MIN;
     int chavePai = aux->noPai->vetChaves[posNo];
     printf("> Chave do PAI encontrada (pos: %d): %d\n", posNo, chavePai);
 
-    // Faz um shift porque o primeiro elemento vai ser removido [..., XX, YY] => [XX, YY]
-    for(int index = 0; index < irmaoDir->ocupacaoChaves-1; index++) 
-        irmaoDir->vetChaves[index] = irmaoDir->vetChaves[index+1];
-    
-    // Desce o pai para o nó removido
+    // Adiciona a chave do pai ao nó atual
     aux->vetChaves[0] = chavePai;
 
-    // Sobe o "emprestado" do irmão para o pai
+    // Sobe a chave do irmão para o pai
     aux->noPai->vetChaves[posNo] = chaveIrmao;
 
+    // Se não for folha, mover o filho correspondente
+    if (!aux->folha) {
+        aux->vetFilho[aux->ocupacaoFilhos] = irmaoDir->vetFilho[0];
+        if (aux->vetFilho[aux->ocupacaoFilhos]) {
+            aux->vetFilho[aux->ocupacaoFilhos]->noPai = aux;
+        }
+        aux->ocupacaoFilhos++;
+        for (int i = 0; i < irmaoDir->ocupacaoFilhos-1; i++) {
+            irmaoDir->vetFilho[i] = irmaoDir->vetFilho[i+1];
+        }
+        irmaoDir->vetFilho[irmaoDir->ocupacaoFilhos-1] = NULL;
+        irmaoDir->ocupacaoFilhos--;
+    }
+
+    // Deslocar chaves no irmão à direita
+    for (int i = 0; i < irmaoDir->ocupacaoChaves-1; i++) {
+        irmaoDir->vetChaves[i] = irmaoDir->vetChaves[i+1];
+    }
+
+    irmaoDir->vetChaves[irmaoDir->ocupacaoChaves-1] = INT_MIN;
     irmaoDir->ocupacaoChaves--;
 }
 
@@ -583,6 +618,9 @@ void removeChave(int valor, arv234 *arv) {
                 mergeRight(aux, irmaoDir, pos, posNo);
             }
         }
+
+        if(aux->noPai->ocupacaoChaves < MIN_CHAVES)
+            ajustarParaCima(aux->noPai, arv);
     }
     
     // Casos para quando o elemento está em um nó interno
@@ -630,12 +668,10 @@ void removeChave(int valor, arv234 *arv) {
                     printf("Merging do irmao da direita.\n");
                     mergeRight(a, irmaoDir, pos, posNo);
                 }
-
-                if(a->noPai->ocupacaoChaves < MIN_CHAVES)
-                    ajustarParaCima(a->noPai, arv);
             }
             
-
+            if(a->noPai->ocupacaoChaves < MIN_CHAVES)
+                ajustarParaCima(a->noPai, arv);
         }
 
     }
