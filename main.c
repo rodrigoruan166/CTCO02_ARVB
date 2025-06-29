@@ -8,7 +8,7 @@ int main() {
     //,31,10,15,33,32,41,6,3
     //11,25,23,2,4,5,6,7,8,9,10,13,14
     
-    int ele[] = {10, 7, 20, 30};
+    int ele[] = {10, 18, 7, 15, 16, 30, 25, 40};
     int tam = sizeof(ele) / sizeof(int);
     printf("%d", tam);
     for(int i = 0; i < tam; i++)
