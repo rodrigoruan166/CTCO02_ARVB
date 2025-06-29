@@ -767,12 +767,11 @@ void removeChave(int valor, arv234 *arv) {
                     printf("Merging do irmao da direita.\n");
                     mergeRight(arv, a, irmaoDir, pos, posNo);
                 }
-
-                if(aux->noPai && a->noPai->ocupacaoChaves < MIN_CHAVES)
-                    ajustarParaCima(a->noPai, arv);
             }
         }
 
+        if(a->noPai && a->noPai->ocupacaoChaves < MIN_CHAVES)
+            ajustarParaCima(a->noPai, arv);
     }
 }
 
