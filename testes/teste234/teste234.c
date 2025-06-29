@@ -18,9 +18,9 @@
 #include "../../algoritmos/Arvore234/Arvore234.h"
 #include "./teste234.h"
 
-void teste1()
+void teste1(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -36,9 +36,9 @@ void teste1()
     imprimirPorNivel(arv);
 }
 
-void teste2()
+void teste2(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -55,9 +55,9 @@ void teste2()
 }
 
 // PEGA SUCESSOR PARA DAR REPLACE NO ELEMENTO EXCLUIDO
-void teste3()
+void teste3(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -75,9 +75,9 @@ void teste3()
 }
 
 // REMOVE DO FOLHA do meio, KEYS > MIN_KEYS
-void teste4()
+void teste4(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -94,9 +94,9 @@ void teste4()
 }
 
 // REMOVE DO FOLHA do canto esquerdo, KEYS > MIN_KEYS
-void teste5()
+void teste5(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -113,9 +113,9 @@ void teste5()
 }
 
 // REMOVE DO FOLHA do canto direito, KEYS > MIN_KEYS
-void teste6()
+void teste6(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -132,9 +132,9 @@ void teste6()
 }
 
 // REMOVE FOLHA COM MERGE À DIREITA
-void teste7()
+void teste7(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -152,9 +152,9 @@ void teste7()
 
 // ROTAÇÃO À ESQUERDA
 // 10;9;8;6;5;4;3
-void teste8()
+void teste8(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -172,9 +172,9 @@ void teste8()
 
 // MERGE à ESQUERDA
 // 5;10;20;30;40;50
-void teste9()
+void teste9(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -193,9 +193,9 @@ void teste9()
 
 // MERGE à DIREITA
 // 5;10;20;30;40;50
-void teste10()
+void teste10(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -212,9 +212,9 @@ void teste10()
     imprimirPorNivel(arv);
 }
 
-void teste11()
+void teste11(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -232,9 +232,9 @@ void teste11()
 }
 
 // Inserção em nó folha sem split
-void teste12()
+void teste12(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -250,9 +250,9 @@ void teste12()
 }
 
 // Inserção em nó gerando split na folha
-void teste13()
+void teste13(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -268,9 +268,9 @@ void teste13()
 }
 
 // Inserção causa split em folha e propagação para raiz
-void teste14()
+void teste14(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -287,9 +287,9 @@ void teste14()
 
 // Inserção com split em um nó interno
 // Folha faz split e o pai tem 3 chaves
-void teste15()
+void teste15(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -305,9 +305,9 @@ void teste15()
 }
 
 // Remoção de uma chave de um nó folha com mais de 1 chave
-void teste16()
+void teste16(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -324,9 +324,9 @@ void teste16()
 }
 
 // Remoção de uma chave de um nó interno (redistribuição)
-void teste17()
+void teste17(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -343,9 +343,9 @@ void teste17()
 }
 
 // Remoção de nó folha com 1 chave, merge com pai
-void teste18()
+void teste18(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -363,9 +363,9 @@ void teste18()
 }
 
 // Remoção de nó folha com 1 chave, merge com pai
-void teste19()
+void teste19(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -383,9 +383,9 @@ void teste19()
 }
 
 // Remoção da última chave da raiz (altura diminui)
-void teste20()
+void teste20(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -404,9 +404,9 @@ void teste20()
 }
 
 // Remoção da última chave da raiz (altura diminui)
-void teste21()
+void teste21(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -425,9 +425,9 @@ void teste21()
 }
 
 // 18;14;11;4;12;16;19;20;7;21;22
-void teste22()
+void teste22(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -452,9 +452,9 @@ void teste22()
 }
 
 // 17;20;25;23;12;115;55;47;31;21;43;44;46
-void teste23()
+void teste23(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -473,9 +473,9 @@ void teste23()
     imprimirPorNivel(arv);
 }
 
-void teste24()
+void teste24(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -493,9 +493,9 @@ void teste24()
     imprimirPorNivel(arv);
 }
 
-void teste25()
+void teste25(arv234 *arv)
 {
-    arv234 *arv = alocaArvore();
+    
 
     if (!arv)
         return;
@@ -526,35 +526,39 @@ f functions[] = {
     teste2,
     teste3,
     teste4,
-     teste5,
-     teste6,
-     teste7,
+    teste5,
+    teste6,
+    teste7,
     teste8,
-     teste9,
+    teste9,
     teste10,
-     teste11,
-     teste12,
-     teste13,
+    teste11,
+    teste12,
+    teste13,
     teste14,
-     teste15,
-     teste16,
-     teste17,
-     teste18,
-     teste19,
-     teste20,
-     teste21,
-     teste22,
-     teste23,
+    teste15,
+    teste16,
+    teste17,
+    teste18,
+    teste19,
+    teste20,
+    teste21,
+    teste22,
+    teste23,
     teste24,
     teste25
 };
 
-int main()
+int main(arv234 *arv)
 {
     for (int i = 0; i < NUMBER_OF_TEST_CASES; i++)
     {
-        printf("\n\n ######## CASO %d ########\n\n", i + 1);
-        functions[i]();
+        arv234 *arv = alocaArvore();
+        printf("\n\n ######################################################## CASO %d ########\n\n", i + 1);
+        functions[i](arv);
+
+        printf("\n\n```\nTOTAL SPLIT %d \nTOTAL MERGE %d \nTOTAL BORROW %d\n ```", getTotalSplit(arv), getTotalMerge(arv), getTotalBorrow(arv));
+        free(arv);
     }
 
     return 0;

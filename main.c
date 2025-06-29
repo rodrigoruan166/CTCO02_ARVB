@@ -14,6 +14,7 @@ int main() {
     for(int i = 0; i < tam; i++)
         insereChave(ele[i], T2);
 
+    printf("TOTAL SPLIT %d\n", getTotalSplit(T2));
     printf("TEST\n");
 
     rb *arvRb = alocaArvoreRb();
