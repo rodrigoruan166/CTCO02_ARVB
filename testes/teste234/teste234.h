@@ -34,3 +34,29 @@ void teste8();
 void teste9();
 
 void teste10();
+
+void teste11();
+
+void teste12();
+
+void teste13();
+
+void teste14();
+
+void teste15();
+
+void teste16();
+
+void teste17();
+
+void teste18();
+
+void teste19();
+
+void teste20();
+
+void teste21();
+
+void teste22();
+
+void teste23();
