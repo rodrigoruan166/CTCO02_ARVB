@@ -474,7 +474,7 @@ void teste23()
     imprimirPorNivel(arv);
     removeChave(7, arv);
     imprimirPorNivel(arv);
-    removeChave(4, arv);
+    removeChave(22, arv);
     imprimirPorNivel(arv);
 }
 
