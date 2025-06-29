@@ -42,22 +42,22 @@ noRB* convert234ToRB(no234 *node, rb *arvore) {
         return raiz;
     } else if (ocupacao == 2) {
         // Nó 3 → preto com filho vermelho à esquerda
-        noRB *raiz = criaNoRB(chaves[1], 'P', arvore);
-        noRB *filhoEsq = criaNoRB(chaves[0], 'V', arvore);
+        noRB *raiz = criaNoRB(chaves[0], 'P', arvore);
+        noRB *filhoDir = criaNoRB(chaves[1], 'V', arvore);
 
         noRB *f0 = convert234ToRB(filhos[0], arvore);
         noRB *f1 = convert234ToRB(filhos[1], arvore);
         noRB *f2 = convert234ToRB(filhos[2], arvore);
 
-        setEsquerda(filhoEsq, f0);
-        setDireita(filhoEsq, f1);
-        setPai(filhoEsq, raiz);
-        if (f0 != retornaSentinelaRb(arvore)) setPai(f0, filhoEsq);
-        if (f1 != retornaSentinelaRb(arvore)) setPai(f1, filhoEsq);
+        setEsquerda(filhoDir, f1);
+        setDireita(filhoDir, f2);
+        setPai(filhoDir, raiz);
+        if (f1 != retornaSentinelaRb(arvore)) setPai(f1, filhoDir);
+        if (f2 != retornaSentinelaRb(arvore)) setPai(f2, filhoDir);
 
-        setEsquerda(raiz, filhoEsq);
-        setDireita(raiz, f2);
-        if (f2 != retornaSentinelaRb(arvore)) setPai(f2, raiz);
+        setEsquerda(raiz, f0);
+        setDireita(raiz, filhoDir);
+        if (f0 != retornaSentinelaRb(arvore)) setPai(f0, raiz);
 
         return raiz;
 
