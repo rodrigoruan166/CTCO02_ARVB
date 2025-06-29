@@ -101,4 +101,6 @@ int getTotalBorrow(arv234 *a);
 
 int getTotalMerge(arv234 *a);
 
+int atualizaAltura(arv234 *a);
+
 no234 *buscaNo(int valor, int *pos, int *posNo, arv234 *arv);

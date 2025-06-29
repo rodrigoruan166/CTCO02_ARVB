@@ -49,6 +49,7 @@ struct arv {
     int totalSplit;
     int totalBorrow;
     int totalMerge;
+    int alturaArv;
 };
 
 // Aloca o nó 
@@ -142,6 +143,21 @@ int getTotalMerge(arv234 *a) {
     if (!a)
         return 0;
     return a->totalMerge;
+}
+
+int atualizaAltura(arv234 *a) {
+    if(!a) return 0;
+
+    int contador = 1;
+    no234 *aux = a->raiz;
+    /*Percorre a árvore a partir dos filhos até achar um filho que não tenha outros filhos*/
+    while(aux->ocupacaoFilhos > 0) {
+        aux = aux->vetFilho[0];
+        contador++;
+    }
+
+    a->alturaArv = contador;
+    return contador;
 }
 
 /* Split executa recursivamente caso o nó tenha ultrapassado o máximo de chaves permitidas. */
@@ -702,6 +718,8 @@ void removeChave(int valor, arv234 *arv) {
         }
         if (aux->noPai && aux->noPai->ocupacaoChaves < MIN_CHAVES)
             ajustarParaCima(aux->noPai, arv);
+
+        atualizaAltura(arv);
     }
     
     // Casos para quando o elemento está em um nó interno
@@ -783,5 +801,8 @@ void insereChave(int valor, arv234 *arv) {
     if (aux->ocupacaoChaves > MAX_CHAVES) {
         printf("Iniciando split\n");
         split(aux, arv);
-    } 
+    }
+    
+    atualizaAltura(arv);
+
 }
