@@ -433,6 +433,17 @@ void mergeLeft(no234 *aux, no234* irmaoEsq, int pos, int posNo) {
     irmaoEsq->vetChaves[irmaoEsq->ocupacaoChaves] = chavePai;
     irmaoEsq->ocupacaoChaves++;
 
+    // Transferir filhos de aux para irmaoEsq, se não for folha
+    if (!aux->folha) {
+        for (int i = 0; i < aux->ocupacaoFilhos; i++) {
+            irmaoEsq->vetFilho[irmaoEsq->ocupacaoFilhos] = aux->vetFilho[i];
+            if (irmaoEsq->vetFilho[irmaoEsq->ocupacaoFilhos]) {
+                irmaoEsq->vetFilho[irmaoEsq->ocupacaoFilhos]->noPai = irmaoEsq;
+            }
+            irmaoEsq->ocupacaoFilhos++;
+        }
+    }
+
     // Shift nas chaves pai
     for(int index = posNo-1; index < aux->noPai->ocupacaoChaves-1; index++) 
         aux->noPai->vetChaves[index] = aux->noPai->vetChaves[index+1];
@@ -476,6 +487,21 @@ void mergeRight(no234 *aux, no234* irmaoDir, int pos, int posNo) {
     // Shift nos filhos do pai
     for(int index = posNo; index < aux->noPai->ocupacaoFilhos-1; index++) 
         aux->noPai->vetFilho[index] = aux->noPai->vetFilho[index+1];
+
+    // Transferir filhos de aux para irmaoDir, se não for folha
+    if (!aux->folha) {
+        for (int i = irmaoDir->ocupacaoFilhos - 1; i >= 0; i--) {
+            irmaoDir->vetFilho[i + aux->ocupacaoFilhos] = irmaoDir->vetFilho[i];
+        }
+
+        for (int i = 0; i < aux->ocupacaoFilhos; i++) {
+            irmaoDir->vetFilho[i] = aux->vetFilho[i];
+            if (irmaoDir->vetFilho[i]) {
+                irmaoDir->vetFilho[i]->noPai = irmaoDir;
+            }
+        }
+        irmaoDir->ocupacaoFilhos += aux->ocupacaoFilhos;
+    }
 
     aux->noPai->ocupacaoFilhos--;
     aux->noPai->ocupacaoChaves--;

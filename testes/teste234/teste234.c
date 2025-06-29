@@ -451,6 +451,7 @@ void teste22()
     imprimirPorNivel(arv);
 }
 
+// 18;14;11;4;12;16;19;20;7;21;22
 void teste23()
 {
     arv234 *arv = alocaArvore();
@@ -466,10 +467,14 @@ void teste23()
     }
 
     removeChave(21, arv);
+    imprimirPorNivel(arv);
     removeChave(18, arv);
+    imprimirPorNivel(arv);
     removeChave(19, arv);
-    removeChave(16, arv);
-
+    imprimirPorNivel(arv);
+    removeChave(7, arv);
+    imprimirPorNivel(arv);
+    removeChave(4, arv);
     imprimirPorNivel(arv);
 }
 
@@ -498,14 +503,14 @@ const int NUMBER_OF_TEST_CASES = 1;
 f functions[] = {
     //teste1,
     //teste2,
-    teste3,
-    // teste4,
+    //teste3,
+    //teste4,
     // teste5,
     // teste6,
     // teste7,
     // teste8,
     // teste9,
-    // teste10,
+    //teste10,
     // teste11,
     // teste12,
     // teste13,
@@ -518,7 +523,7 @@ f functions[] = {
     // teste20,
     // teste21,
     // teste22,
-    // teste23,
+     teste23,
     //teste24
 };
 
