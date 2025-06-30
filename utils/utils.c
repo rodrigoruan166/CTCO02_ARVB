@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+#include <string.h>
 #include "utils.h"
 
 /* Aloca um vetor de tamanho @tam */
@@ -104,3 +105,34 @@ int *geraAleatorios(int tam, int semente)
 
     return vetor;
 }
+
+/* Cria o arquivo de resultado final.
+    Vamos usar para fazer os gráficos e a apresentação
+    Deve conter:
+    quantidade split
+    altura arvore
+    total blocos
+    ...
+    ..
+    .
+    etc
+*/
+void escreveArquivo(char *nomeArquivo, char *operacao, int quantidade_rotacoes, int quantidade_split, int altura_arvore, int total_blocos)
+{
+    FILE *arq;
+    int arquivoExiste = 0;
+    if (access(nomeArquivo, F_OK) == 0)
+        arquivoExiste = 1;
+
+    arq = fopen(nomeArquivo, arquivoExiste ? "a" : "w");
+    if (!arq)
+        return;
+
+    if (!arquivoExiste)
+    {
+        fprintf(arq, "Operacao;Quantidade Rotacoes;Quantidade Split;Altura Arvore;Total Blocos;\n");
+    }
+
+    fprintf(arq, "%s;%d;%d;%d;%d\n", operacao, quantidade_rotacoes, quantidade_split, altura_arvore, total_blocos);
+    fclose(arq);
+};

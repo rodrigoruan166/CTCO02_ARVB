@@ -1,0 +1,9 @@
+Operacao;Quantidade Rotacoes;Quantidade Split;Altura Arvore;Total Blocos;
+insercao_100;0;50;5;0
+insercao_1000;0;524;7;0
+insercao_10000;0;5143;9;0
+insercao_10000;0;51567;11;0
+remocao_10;176;5143;9;0
+remocao_20;426;5157;8;0
+remocao_35;840;5157;8;0
+remocao_50;840;5157;8;0

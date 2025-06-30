@@ -59,6 +59,9 @@ void merge(no234 *noDesbalanceado, no234 *irmao);
 Encontra o valor do predecessor para um dado nó origem
 */
 no234 *encontraPredecessor(no234 *origem, int posElemento, int *posicaoRel);
+
+int getAlturaArv(arv234 *arv);
+
 /*
 Encontra o valor do sucessor para um dado nó origem
 */

@@ -36,3 +36,16 @@ quantidade de elementos que deve ser gerada e a semente é o inteiro que
 permite que esse conjunto de dados seja reproduzido posteriormente. A função
 retorna o vetor previamente preenchido.*/
 int *geraAleatorios(int tam, int semente);
+
+/* Cria o arquivo de resultado final.
+    Vamos usar para fazer os gráficos e a apresentação
+    Deve conter:
+    quantidade split
+    altura arvore
+    total blocos
+    ...
+    ..
+    .
+    etc
+*/
+void escreveArquivo(char *nomeArquivo, char *operacao, int quantidade_rotacoes, int quantidade_split, int altura_arvore, int total_blocos);

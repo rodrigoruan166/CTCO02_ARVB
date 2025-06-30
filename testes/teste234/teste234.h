@@ -72,3 +72,11 @@ void teste27();
 void teste28();
 
 void teste29();
+
+void teste30();
+
+void teste31();
+
+void teste32();
+
+void teste33();

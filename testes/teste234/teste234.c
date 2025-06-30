@@ -20,6 +20,8 @@
 #include "./teste234.h"
 #include "../../utils/utils.h"
 
+char arquivo[] = "./dataset/resultados/resultados.csv";
+
 void teste1(arv234 *arv)
 {
 
@@ -504,13 +506,15 @@ void teste25(arv234 *arv)
     {
         insereChave(c[i], arv);
     }
-    
+
     removeChave(68, arv);
     removeChave(88, arv);
     removeChave(79, arv);
     removeChave(95, arv);
     imprimirPorNivel(arv);
 }
+
+// TAMANHO DE AMOSTRA PARA INSERÇÃO
 
 void teste26(arv234 *arv)
 {
@@ -525,6 +529,7 @@ void teste26(arv234 *arv)
         insereChave(chaves[i], arv);
     }
 
+    escreveArquivo(arquivo, "insercao_100", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
 
@@ -541,6 +546,7 @@ void teste27(arv234 *arv)
         insereChave(chaves[i], arv);
     }
 
+    escreveArquivo(arquivo, "insercao_1000", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
 
@@ -557,6 +563,7 @@ void teste28(arv234 *arv)
         insereChave(chaves[i], arv);
     }
 
+    escreveArquivo(arquivo, "insercao_10000", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
 
@@ -566,7 +573,6 @@ void teste29(arv234 *arv)
         return;
 
     int qtyValores = 100000;
-    int t = 0;
     int *chaves = geraAleatorios(qtyValores, time(NULL));
 
     for (int i = 0; i < qtyValores; i++)
@@ -574,11 +580,109 @@ void teste29(arv234 *arv)
         insereChave(chaves[i], arv);
     }
 
+    escreveArquivo(arquivo, "insercao_10000", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
-
 }
 
-const int NUMBER_OF_TEST_CASES = 29;
+// TAMANHO DA AMOSTRA PARA REMOÇÃO (árvore com 10 mil el.)
+
+void teste30(arv234 *arv)
+{
+    if (!arv)
+        return;
+
+    int qtyValores = 10000;
+    int *chaves = geraAleatorios(qtyValores, time(NULL));
+
+    for (int i = 0; i < qtyValores; i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    int t10_percent = qtyValores * 10 / 100;
+
+    for (int i = 0; i < t10_percent; i++)
+    {
+        removeChave(chaves[i], arv);
+    }
+
+    escreveArquivo(arquivo, "remocao_10", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
+    imprimirPorNivel(arv);
+}
+
+void teste31(arv234 *arv)
+{
+    if (!arv)
+        return;
+
+    int qtyValores = 10000;
+    int *chaves = geraAleatorios(qtyValores, time(NULL));
+
+    for (int i = 0; i < qtyValores; i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    int t20_percent = qtyValores * 20 / 100;
+
+    for (int i = 0; i < t20_percent; i++)
+    {
+        removeChave(chaves[i], arv);
+    }
+
+    escreveArquivo(arquivo, "remocao_20", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
+    imprimirPorNivel(arv);
+}
+
+void teste32(arv234 *arv)
+{
+    if (!arv)
+        return;
+
+    int qtyValores = 10000;
+    int *chaves = geraAleatorios(qtyValores, time(NULL));
+
+    for (int i = 0; i < qtyValores; i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    int t35_percent = qtyValores * 35 / 100;
+
+    for (int i = 0; i < t35_percent; i++)
+    {
+        removeChave(chaves[i], arv);
+    }
+
+    escreveArquivo(arquivo, "remocao_35", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
+    imprimirPorNivel(arv);
+}
+
+void teste33(arv234 *arv)
+{
+    if (!arv)
+        return;
+
+    int qtyValores = 10000;
+    int *chaves = geraAleatorios(qtyValores, time(NULL));
+
+    for (int i = 0; i < qtyValores; i++)
+    {
+        insereChave(chaves[i], arv);
+    }
+
+    int t50_percent = qtyValores * 35 / 100;
+
+    for (int i = 0; i < t50_percent; i++)
+    {
+        removeChave(chaves[i], arv);
+    }
+
+    escreveArquivo(arquivo, "remocao_50", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
+    imprimirPorNivel(arv);
+}
+
+const int NUMBER_OF_TEST_CASES = 33;
 f functions[] = {
     teste1,
     teste2,
@@ -608,8 +712,11 @@ f functions[] = {
     teste26,
     teste27,
     teste28,
-    teste29
-};
+    teste29,
+    teste30,
+    teste31,
+    teste32,
+    teste33};
 
 int main(arv234 *arv)
 {

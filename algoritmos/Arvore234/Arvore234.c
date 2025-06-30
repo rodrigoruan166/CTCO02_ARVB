@@ -271,6 +271,13 @@ void imprimirChavesNo(no234 *no, int d) {
     printf("]");
 }
 
+int getAlturaArv(arv234 *arv) {
+    if (!arv)
+        return 0;
+
+    return arv->alturaArv;
+}
+
 void imprimirPorNivel(arv234 *arv) {
     if (arv == NULL || arv->raiz == NULL) {
         printf("Árvore vazia!\n");
