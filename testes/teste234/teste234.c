@@ -580,7 +580,7 @@ void teste29(arv234 *arv)
         insereChave(chaves[i], arv);
     }
 
-    escreveArquivo(arquivo, "insercao_10000", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
+    escreveArquivo(arquivo, "insercao_100000", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
 
