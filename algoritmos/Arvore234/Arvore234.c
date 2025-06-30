@@ -774,16 +774,25 @@ void removeChave(int valor, arv234 *arv) {
 
 void insereChave(int valor, arv234 *arv) {
     no234 *aux = arv->raiz;
-    
+
     // Navegar até a folha
     while (!aux->folha) {
         int i = 0;
+        
         while (i < aux->ocupacaoChaves && valor > aux->vetChaves[i]) {
             i++;
         }
+
+        if(i < aux->ocupacaoChaves && aux->vetChaves[i] == valor) return; // Verifica se não existe no nó interno
         aux = aux->vetFilho[i];
     }
     
+    for (int j = 0; j < aux->ocupacaoChaves; j++) {
+        if (aux->vetChaves[j] == valor) {
+            return;  // Valor já existe, não insere
+        }
+    }
+
     // Inserir na folha
     int i = aux->ocupacaoChaves;
     while (i > 0 && valor < aux->vetChaves[i-1]) {
