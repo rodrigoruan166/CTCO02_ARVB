@@ -116,8 +116,14 @@ int getTotalBorrow(arv234 *a);
 /*Retorna o total de merges realizados naquela árvore*/
 int getTotalMerge(arv234 *a);
 
+/*Retorna o total de blocos naquela árvore*/
+int getTotalBlocos(arv234 *a);
+
 /*Retorna a altura e atualiza na estrutura da árvore*/
 int atualizaAltura(arv234 *a);
+
+/*Retorna a altura e atualiza na estrutura da árvore*/
+int atualizaQuantBlocos(no234 *no);
 
 /*Retorna o nó que contém o valor do argumento. Atualiza pos como a posição do 
   elemento no nó e posNo com a posição relativa em relação ao seu pai */

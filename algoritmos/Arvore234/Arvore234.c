@@ -50,6 +50,7 @@ struct arv {
     int totalBorrow;
     int totalMerge;
     int totalChaves;
+    int totalBlocos;
     int alturaArv;
 };
 
@@ -91,7 +92,7 @@ arv234 *alocaArvore() {
 
     // Inicialmente, o nó raiz é uma folha
     arv->raiz->folha = 1;
-    arv->totalBorrow = arv->totalMerge = arv->totalSplit = arv->totalChaves = arv->alturaArv = 0;
+    arv->totalBorrow = arv->totalMerge = arv->totalSplit = arv->totalChaves = arv->alturaArv = arv->totalBlocos = 0;
     arv->ordem = 4;
 
     return arv;
@@ -152,6 +153,12 @@ int getTotalChaves(arv234 *a) {
     return a->totalChaves;
 }
 
+int getTotalBlocos(arv234 *a) {
+    if (!a)
+        return 0;
+    return a->totalBlocos;
+}
+
 int atualizaAltura(arv234 *a) {
     if(!a) return 0;
 
@@ -165,6 +172,18 @@ int atualizaAltura(arv234 *a) {
 
     a->alturaArv = contador;
     return contador;
+}
+
+int atualizaQuantBlocos(no234 *no) {
+    if (no == NULL) 
+        return 0;
+
+    int total = 1;
+
+    // Deixa ele chegar em um nó nulo
+    for (int i = 0; i <= no->ocupacaoChaves; i++)  total += atualizaQuantBlocos(no->vetFilho[i]);
+    
+    return total;
 }
 
 /* Split executa recursivamente caso o nó tenha ultrapassado o máximo de chaves permitidas. */
@@ -283,9 +302,6 @@ void imprimirPorNivel(arv234 *arv) {
         printf("Árvore vazia!\n");
         return;
     }
-
-    printf("kfdksfdsk\n");
-
     no234 **fila = (no234**) malloc(sizeof(no234*) * 100000);
     int *niveis = (int*) malloc(sizeof(int) * 100000);
     int *noRelativo = (int*) malloc(sizeof(int) * 100000);
@@ -692,8 +708,6 @@ void removeChave(int valor, arv234 *arv) {
         }
         if (aux->noPai && aux->noPai->ocupacaoChaves < MIN_CHAVES)
             ajustarParaCima(aux->noPai, arv);
-
-        atualizaAltura(arv);
     }
     
     // Casos para quando o elemento está em um nó interno
@@ -747,6 +761,10 @@ void removeChave(int valor, arv234 *arv) {
         if(a->noPai && a->noPai->ocupacaoChaves < MIN_CHAVES)
             ajustarParaCima(a->noPai, arv);
     }
+
+    atualizaAltura(arv);
+    int blocos = atualizaQuantBlocos(arv->raiz);
+    arv->totalBlocos = blocos;
 }
 
 void insereChave(int valor, arv234 *arv) {
@@ -777,5 +795,7 @@ void insereChave(int valor, arv234 *arv) {
     }
     
     atualizaAltura(arv);
+    int blocos = atualizaQuantBlocos(arv->raiz);
+    arv->totalBlocos = blocos;
     arv->totalChaves++;
 }
