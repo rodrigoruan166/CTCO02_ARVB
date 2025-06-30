@@ -689,19 +689,21 @@ void removeChave(int valor, arv234 *arv) {
         else {
             no234 *irmaoEsq = ((posNo-1) >= 0 && aux->noPai->vetFilho[posNo-1] != NULL) ? aux->noPai->vetFilho[posNo-1] : NULL;
             no234 *irmaoDir = ((posNo+1) <= MAX_FILHOS-1 && aux->noPai->vetFilho[posNo+1] != NULL) ? aux->noPai->vetFilho[posNo+1] : NULL;
-            
+
+            printf("Veio para a condicao em que o pred tem menos de min key: pos: %d ocupacao %d e posNo %d\n", pos, aux->ocupacaoChaves, posNo);
+
             // Se for possível, EMPRESTAR DA ESQ
-            if(irmaoEsq && irmaoEsq->ocupacaoChaves > MIN_CHAVES) {
+            if(irmaoEsq != NULL && irmaoEsq->ocupacaoChaves > MIN_CHAVES) {
                 printf("Emprestando do irmao da esquerda.\n");
                 borrowLeft(arv, aux, irmaoEsq, pos, posNo);
             }
             // Se for possível, EMPRESTAR DA DIR
-            else if(irmaoDir && irmaoDir->ocupacaoChaves > MIN_CHAVES) {
+            else if(irmaoDir != NULL && irmaoDir->ocupacaoChaves > MIN_CHAVES) {
                 printf("Emprestando do irmao da direita.\n");
                 borrowRight(arv, aux, irmaoDir, pos, posNo);
             }
             // Se for possível, MERGE DA ESQ
-            else if(irmaoEsq) {
+            else if(irmaoEsq != NULL) {
                 printf("Merging do irmao da esquerda.\n");
                 mergeLeft(arv, aux, irmaoEsq, pos, posNo);
             }
@@ -727,15 +729,17 @@ void removeChave(int valor, arv234 *arv) {
         //
         // Caso 1: Nó do predecessor tem mais do que MIN_KEYS
         if(a->ocupacaoChaves > MIN_CHAVES) {
+            printf("Veio para a condicao em que o pred min key\n");
             aux->vetChaves[pos] = valorPred;
             a->vetChaves[a->ocupacaoChaves-1] = INT_MIN;
             a->ocupacaoChaves--;
         } else {
+            printf("Veio para a condicao em que o pred tem menos de min key: pos: %d ocupacao %d\n", pos, a->ocupacaoChaves);
             aux->vetChaves[pos] = valorPred;
             a->vetChaves[a->ocupacaoChaves-1] = INT_MIN;
             a->ocupacaoChaves--;
 
-            pos = a->ocupacaoChaves-1;
+            pos = a->ocupacaoChaves;
             if(irmaoEsq && irmaoEsq->ocupacaoChaves > MIN_CHAVES) {
                 printf("Emprestando do irmao da esquerda.\n");
                 borrowLeft(arv, a, irmaoEsq, pos, posNo);

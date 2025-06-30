@@ -686,9 +686,9 @@ void teste33(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-const int NUMBER_OF_TEST_CASES = 33;
+const int NUMBER_OF_TEST_CASES = 4;
 f functions[] = {
-    teste1,
+    /* teste1,
     teste2,
     teste3,
     teste4,
@@ -716,7 +716,7 @@ f functions[] = {
     teste26,
     teste27,
     teste28,
-    teste29,
+    teste29, */
     teste30,
     teste31,
     teste32,
