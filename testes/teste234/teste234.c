@@ -606,7 +606,7 @@ void teste30(arv234 *arv)
         removeChave(chaves[i], arv);
     }
 
-    escreveArquivo(arquivo, "remocao_10", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
+    escreveArquivo(arquivo, "remocao_10", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), getTotalBlocos(arv)); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
 
@@ -630,7 +630,7 @@ void teste31(arv234 *arv)
         removeChave(chaves[i], arv);
     }
 
-    escreveArquivo(arquivo, "remocao_20", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
+    escreveArquivo(arquivo, "remocao_20", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), getTotalBlocos(arv)); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
 
@@ -673,7 +673,7 @@ void teste33(arv234 *arv)
         insereChave(chaves[i], arv);
     }
 
-    int t50_percent = qtyValores * 35 / 100;
+    int t50_percent = qtyValores * 50 / 100;
 
     for (int i = 0; i < t50_percent; i++)
     {
