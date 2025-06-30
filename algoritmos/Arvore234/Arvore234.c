@@ -687,10 +687,11 @@ void removeChave(int valor, arv234 *arv) {
         }
         // Caso 2 (Folha) : Quantidade de chaves é menor ou igual a MIN_CHAVES
         else {
-            no234 *irmaoEsq = ((posNo-1) >= 0 && aux->noPai->vetFilho[posNo-1] != NULL) ? aux->noPai->vetFilho[posNo-1] : NULL;
-            no234 *irmaoDir = ((posNo+1) <= MAX_FILHOS-1 && aux->noPai->vetFilho[posNo+1] != NULL) ? aux->noPai->vetFilho[posNo+1] : NULL;
+            no234 *irmaoEsq = ((posNo-1) >= 0 && posNo - 1 < aux->noPai->ocupacaoFilhos && aux->noPai->vetFilho[posNo-1] != NULL) ? aux->noPai->vetFilho[posNo-1] : NULL;
+            no234 *irmaoDir = (posNo + 1 < aux->noPai->ocupacaoFilhos && aux->noPai->vetFilho[posNo+1] != NULL) ? aux->noPai->vetFilho[posNo+1] : NULL;
 
             printf("Veio para a condicao em que o pred tem menos de min key: pos: %d ocupacao %d e posNo %d\n", pos, aux->ocupacaoChaves, posNo);
+            printf("TESTESTESTE\n");
 
             // Se for possível, EMPRESTAR DA ESQ
             if(irmaoEsq != NULL && irmaoEsq->ocupacaoChaves > MIN_CHAVES) {
@@ -720,12 +721,12 @@ void removeChave(int valor, arv234 *arv) {
     // Casos para quando o elemento está em um nó interno
     else {
         no234 *a = encontraPredecessor(aux, pos, &posNo);
-        no234 *irmaoEsq = ((posNo-1) >= 0 && a->noPai->vetFilho[posNo-1] != NULL) ? a->noPai->vetFilho[posNo-1] : NULL;
-        no234 *irmaoDir = ((posNo+1) <= MAX_FILHOS-1 && a->noPai->vetFilho[posNo+1] != NULL) ? a->noPai->vetFilho[posNo+1] : NULL;
+        no234 *irmaoEsq = ((posNo-1) >= 0 && posNo - 1 < a->noPai->ocupacaoFilhos && a->noPai->vetFilho[posNo-1] != NULL) ? a->noPai->vetFilho[posNo-1] : NULL;
+        no234 *irmaoDir = (posNo + 1 < a->noPai->ocupacaoFilhos && a->noPai->vetFilho[posNo+1] != NULL) ? a->noPai->vetFilho[posNo+1] : NULL;
         int valorPred = a->vetChaves[a->ocupacaoChaves-1];
 
         printf("O valor de pred %d para a chave é %d\n", valorPred, valor);
-        
+        printf("TESTESTESTE\n");
         //
         // Caso 1: Nó do predecessor tem mais do que MIN_KEYS
         if(a->ocupacaoChaves > MIN_CHAVES) {
@@ -736,10 +737,28 @@ void removeChave(int valor, arv234 *arv) {
         } else {
             printf("Veio para a condicao em que o pred tem menos de min key: pos: %d ocupacao %d\n", pos, a->ocupacaoChaves);
             aux->vetChaves[pos] = valorPred;
+            
+            printf("TEST TROCOU AUX VETCHAVES\n");
             a->vetChaves[a->ocupacaoChaves-1] = INT_MIN;
+            printf("REMOVE A VETCHAVES\n");
             a->ocupacaoChaves--;
+            printf("DECREMENTA A->OCUPACAO CHAVES\n");
 
             pos = a->ocupacaoChaves;
+
+            printf("IRMAO ESQUERDA NOT NULL: %d; IRMAO DIREITA NOT NULL: %d \n", irmaoEsq != NULL, irmaoDir!= NULL);
+            if (irmaoDir != NULL) {
+                printf("IRMAO DIR EXISTE\n");
+                printf("IRMAO DIR: %d\n", irmaoDir->ocupacaoChaves);
+            }
+
+            if (irmaoEsq != NULL) {
+                printf("IRMAO ESQ EXISTE\n");
+                printf("IRMAO ESQ: %d\n", irmaoEsq->ocupacaoChaves);
+            }
+    
+            printf("PASSOU POR AQUI\n");
+
             if(irmaoEsq && irmaoEsq->ocupacaoChaves > MIN_CHAVES) {
                 printf("Emprestando do irmao da esquerda.\n");
                 borrowLeft(arv, a, irmaoEsq, pos, posNo);
@@ -754,6 +773,7 @@ void removeChave(int valor, arv234 *arv) {
                 //a->ocupacaoChaves++;
             }
             else {
+                printf("ENTROU NO ELSE DOS EMRGES\n");
                 // Se for possível, MERGE DA ESQ
                 if(irmaoEsq) {
                     printf("Merging do irmao da esquerda.\n");

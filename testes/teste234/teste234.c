@@ -717,9 +717,9 @@ f functions[] = {
     teste27,
     teste28,
     teste29, */
-    teste30,
-    teste31,
-    teste32,
+    // teste30,
+    // teste31,
+    // teste32,
     teste33};
 
 int main(arv234 *arv)
@@ -728,6 +728,7 @@ int main(arv234 *arv)
     {
         arv234 *arv = alocaArvore();
         printf("\n\n ######################################################## CASO %d ########\n\n", i + 1);
+        while(1)
         functions[i](arv);
 
         printf("\n\n```\nTOTAL SPLIT %d \nTOTAL MERGE %d \nTOTAL BORROW %d\nTOTAL CHAVES %d\n ```", getTotalSplit(arv), getTotalMerge(arv), getTotalBorrow(arv), getTotalChaves(arv));
