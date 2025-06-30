@@ -174,16 +174,21 @@ int atualizaAltura(arv234 *a) {
     return contador;
 }
 
-int atualizaQuantBlocos(no234 *no) {
+int atualizaRecBlocos(no234 *no) {
+    //printf("Chegou aqui\n");
     if (no == NULL) 
         return 0;
 
     int total = 1;
-
+    //printf("Chegou aqui 2\n");
     // Deixa ele chegar em um nó nulo
-    for (int i = 0; i <= no->ocupacaoChaves; i++)  total += atualizaQuantBlocos(no->vetFilho[i]);
+    for (int i = 0; i < no->ocupacaoFilhos; i++)  total += atualizaRecBlocos(no->vetFilho[i]);
     
     return total;
+}
+
+int atualizaQuantBlocos(arv234 *arv, no234 *no) {
+    arv->totalBlocos = atualizaRecBlocos(no);
 }
 
 /* Split executa recursivamente caso o nó tenha ultrapassado o máximo de chaves permitidas. */
@@ -646,7 +651,7 @@ void ajustarParaCima(no234 *no, arv234 *arv) {
     if (pai && pai->ocupacaoChaves < MIN_CHAVES)
             ajustarParaCima(pai, arv);
 
-    atualizaAltura(arv);
+    //atualizaAltura(arv);
 }
 
 void removeChave(int valor, arv234 *arv) {
@@ -761,10 +766,6 @@ void removeChave(int valor, arv234 *arv) {
         if(a->noPai && a->noPai->ocupacaoChaves < MIN_CHAVES)
             ajustarParaCima(a->noPai, arv);
     }
-
-    atualizaAltura(arv);
-    int blocos = atualizaQuantBlocos(arv->raiz);
-    arv->totalBlocos = blocos;
 }
 
 void insereChave(int valor, arv234 *arv) {
@@ -794,8 +795,5 @@ void insereChave(int valor, arv234 *arv) {
         split(aux, arv);
     }
     
-    atualizaAltura(arv);
-    int blocos = atualizaQuantBlocos(arv->raiz);
-    arv->totalBlocos = blocos;
     arv->totalChaves++;
 }

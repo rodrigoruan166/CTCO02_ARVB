@@ -123,7 +123,7 @@ int getTotalBlocos(arv234 *a);
 int atualizaAltura(arv234 *a);
 
 /*Retorna a altura e atualiza na estrutura da árvore*/
-int atualizaQuantBlocos(no234 *no);
+int atualizaQuantBlocos(arv234 *arv, no234 *no);
 
 /*Retorna o nó que contém o valor do argumento. Atualiza pos como a posição do 
   elemento no nó e posNo com a posição relativa em relação ao seu pai */

@@ -654,7 +654,9 @@ void teste32(arv234 *arv)
         removeChave(chaves[i], arv);
     }
 
-    escreveArquivo(arquivo, "remocao_35", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
+    atualizaAltura(arv);
+    atualizaQuantBlocos(arv, getRaiz(arv));
+    escreveArquivo(arquivo, "remocao_35", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), getTotalBlocos(arv)); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
 
@@ -678,7 +680,9 @@ void teste33(arv234 *arv)
         removeChave(chaves[i], arv);
     }
 
-    escreveArquivo(arquivo, "remocao_50", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
+    atualizaAltura(arv);
+    atualizaQuantBlocos(arv, getRaiz(arv));
+    escreveArquivo(arquivo, "remocao_50", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), getTotalBlocos(arv)); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
 
