@@ -529,7 +529,8 @@ void teste26(arv234 *arv)
         insereChave(chaves[i], arv);
     }
 
-    escreveArquivo(arquivo, "insercao_100", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
+    atualizaQuantBlocos(arv, getRaiz(arv));
+    escreveArquivo(arquivo, "insercao_100", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), getTotalBlocos(arv)); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
 
@@ -546,7 +547,8 @@ void teste27(arv234 *arv)
         insereChave(chaves[i], arv);
     }
 
-    escreveArquivo(arquivo, "insercao_1000", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
+    atualizaQuantBlocos(arv, getRaiz(arv));
+    escreveArquivo(arquivo, "insercao_1000", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), getTotalBlocos(arv)); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
 
@@ -563,7 +565,8 @@ void teste28(arv234 *arv)
         insereChave(chaves[i], arv);
     }
 
-    escreveArquivo(arquivo, "insercao_10000", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
+    atualizaQuantBlocos(arv, getRaiz(arv));
+    escreveArquivo(arquivo, "insercao_10000", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), getTotalBlocos(arv)); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
 
@@ -580,7 +583,8 @@ void teste29(arv234 *arv)
         insereChave(chaves[i], arv);
     }
 
-    escreveArquivo(arquivo, "insercao_100000", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), 0); // ALTERAR ULTIMO VALOR DE BLOCO;
+    atualizaQuantBlocos(arv, getRaiz(arv));
+    escreveArquivo(arquivo, "insercao_100000", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), getTotalBlocos(arv)); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
 
@@ -606,6 +610,7 @@ void teste30(arv234 *arv)
         removeChave(chaves[i], arv);
     }
 
+    atualizaQuantBlocos(arv, getRaiz(arv));
     escreveArquivo(arquivo, "remocao_10", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), getTotalBlocos(arv)); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
@@ -630,6 +635,7 @@ void teste31(arv234 *arv)
         removeChave(chaves[i], arv);
     }
 
+    atualizaQuantBlocos(arv, getRaiz(arv));
     escreveArquivo(arquivo, "remocao_20", getTotalBorrow(arv), getTotalSplit(arv), getAlturaArv(arv), getTotalBlocos(arv)); // ALTERAR ULTIMO VALOR DE BLOCO;
     imprimirPorNivel(arv);
 }
@@ -686,9 +692,9 @@ void teste33(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-const int NUMBER_OF_TEST_CASES = 4;
+const int NUMBER_OF_TEST_CASES = 8;
 f functions[] = {
-    /* teste1,
+    /*teste1,
     teste2,
     teste3,
     teste4,
@@ -712,14 +718,14 @@ f functions[] = {
     teste22,
     teste23,
     teste24,
-    teste25,
+    teste25,*/
     teste26,
     teste27,
     teste28,
-    teste29, */
-    // teste30,
-    // teste31,
-    // teste32,
+    teste29,
+    teste30,
+    teste31,
+    teste32,
     teste33};
 
 int main(arv234 *arv)
@@ -728,7 +734,6 @@ int main(arv234 *arv)
     {
         arv234 *arv = alocaArvore();
         printf("\n\n ######################################################## CASO %d ########\n\n", i + 1);
-        while(1)
         functions[i](arv);
 
         printf("\n\n```\nTOTAL SPLIT %d \nTOTAL MERGE %d \nTOTAL BORROW %d\nTOTAL CHAVES %d\n ```", getTotalSplit(arv), getTotalMerge(arv), getTotalBorrow(arv), getTotalChaves(arv));
