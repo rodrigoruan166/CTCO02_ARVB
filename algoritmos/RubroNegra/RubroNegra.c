@@ -51,50 +51,64 @@ rb *alocaArvoreRb()
     return arv;
 }
 
-void setRaizRb(rb *T, noRB *raiz) {
+void setRaizRb(rb *T, noRB *raiz)
+{
     T->raiz = raiz;
 }
 
-noRB *getRaizRb(rb *arv) {
+noRB *getRaizRb(rb *arv)
+{
     if (!arv)
         return arv->nil;
 
     return arv->raiz;
 }
 
-void setDireita(noRB* no, noRB* filho) {
-    if (no) no->dir = filho;
+void setDireita(noRB *no, noRB *filho)
+{
+    if (no)
+        no->dir = filho;
 }
 
-void setEsquerda(noRB* no, noRB* filho) {
-    if (no) no->esq = filho;
+void setEsquerda(noRB *no, noRB *filho)
+{
+    if (no)
+        no->esq = filho;
 }
 
-void setPai(noRB* no, noRB* pai) {
-    if (no) no->pai = pai;
+void setPai(noRB *no, noRB *pai)
+{
+    if (no)
+        no->pai = pai;
 }
 
-noRB* getEsquerda(noRB* no) {
+noRB *getEsquerda(noRB *no)
+{
     return no ? no->esq : NULL;
 }
 
-noRB* getDireita(noRB* no) {
+noRB *getDireita(noRB *no)
+{
     return no ? no->dir : NULL;
 }
 
-noRB* getPai(noRB* no) {
+noRB *getPai(noRB *no)
+{
     return no ? no->pai : NULL;
 }
 
-char getCor(noRB* no) {
+char getCor(noRB *no)
+{
     return no ? no->cor : 'P'; // Considere preto por padrão
 }
 
-int getChave(noRB* no) {
+int getChave(noRB *no)
+{
     return no ? no->chave : -1;
 }
 
-noRB *retornaSentinelaRb(rb *arv) {
+noRB *retornaSentinelaRb(rb *arv)
+{
     if (!arv)
         return NULL;
 
@@ -102,7 +116,8 @@ noRB *retornaSentinelaRb(rb *arv) {
 }
 
 // Altera a cor do nó rubro negro
-noRB *alterarCorNoRb(noRB *no, char cor) {
+noRB *alterarCorNoRb(noRB *no, char cor)
+{
     if (!no)
         return NULL;
 
@@ -178,55 +193,75 @@ void insereNo(rb *T, noRB *z)
 // Corrige a árvore após inserção para manter as propriedades da RB Tree
 void RB_Insert_Fixup(rb *T, noRB *z)
 {
+    // Enquanto pai de z for vermelho, há violação da propriedade rubro-negra
     while (z->pai->cor == 'V')
     {
         if (z->pai == z->pai->pai->esq)
         {
             noRB *y = z->pai->pai->dir; // tio de z
-            if (y->cor == 'V') // Caso 1
-            {
-                z->pai->cor = 'P';
-                y->cor = 'P';
-                z->pai->pai->cor = 'V';
-                z = z->pai->pai;
-            }
-            else
-            {
-                if (z == z->pai->dir) // Caso 2
-                {
-                    z = z->pai;
-                    left_rotate(T, z);
-                }
-                // Caso 3
-                z->pai->cor = 'P';
-                z->pai->pai->cor = 'V';
-                right_rotate(T, z->pai->pai);
-            }
-        }
-        else
-        { // mesmo que acima, trocando "left" por "right"
-            noRB *y = z->pai->pai->esq;
+
+            // Caso 1: o tio é vermelho
             if (y->cor == 'V')
             {
+                // Recolore pai e tio para preto
                 z->pai->cor = 'P';
                 y->cor = 'P';
+
+                // Recolore avô para vermelho (pode gerar nova violação acima)
                 z->pai->pai->cor = 'V';
+
+                // Move z para cima na árvore para continuar verificações
                 z = z->pai->pai;
             }
-            else
+            else // Caso 2 ou 3: o tio é preto
             {
+                // Caso 2: z é filho direito: rotação para transformar no Caso 3
+                if (z == z->pai->dir)
+                {
+                    // Move z para o pai
+                    z = z->pai;
+                    // Rotação à esquerda no pai
+                    left_rotate(T, z);
+                }
+
+                // Caso 3: z é filho esquerdo: recolore e rotaciona o avô
+                z->pai->cor = 'P';            // Pai vira preto
+                z->pai->pai->cor = 'V';       // Avô vira vermelho
+                right_rotate(T, z->pai->pai); // rotação à direita no avô
+            }
+        }
+        else // Simétrico: pai de z é filho à direita do avô
+        {
+            // y é o tio de z (irmão esquerdo do pai)
+            noRB *y = z->pai->pai->esq;
+
+            // Caso 1 (simétrico): tio é vermelho
+            if (y->cor == 'V')
+            {
+                z->pai->cor = 'P';      // Pai vira preto
+                y->cor = 'P';           // Tio vira preto
+                z->pai->pai->cor = 'V'; // Avô vira vermelho
+                z = z->pai->pai;        // Sobe z para o avô
+            }
+            else // Caso 2 ou 3 (simétricos)
+            {
+                // Caso 2: z é filho esquerdo: rotação à direita
                 if (z == z->pai->esq)
                 {
-                    z = z->pai;
-                    right_rotate(T, z);
+                    z = z->pai;         // Move z para o pai
+                    right_rotate(T, z); // Rotação à direita no pai
                 }
-                z->pai->cor = 'P';
-                z->pai->pai->cor = 'V';
-                left_rotate(T, z->pai->pai);
+
+                // Caso 3: z é filho direito: recolore e rotaciona
+                z->pai->cor = 'P';           // Pai vira preto
+                z->pai->pai->cor = 'V';      // Avô vira vermelho
+                left_rotate(T, z->pai->pai); // Rotação à esquerda no avô
             }
         }
     }
-    T->raiz->cor = 'P'; // raiz sempre preta
+
+    // Após todos os ajustes, garante que a raiz é preta (regra da árvore rb)
+    T->raiz->cor = 'P';
 }
 
 // Substitui o nó u pelo nó v (usado em remoção)
@@ -244,6 +279,7 @@ void RB_Transplant(rb *T, noRB *u, noRB *v)
     {
         u->pai->dir = v;
     }
+
     v->pai = u->pai;
 }
 
@@ -255,39 +291,97 @@ noRB *Tree_Minimum(rb *T, noRB *x)
     return x;
 }
 
-void left_rotate(rb *T, noRB *x) {
+/*  Antes da rotação à esquerda de x
+     x
+      \
+       y
+      / \
+     T1  T2
+
+    Após a rotação:
+       y
+      / \
+     x   T2
+    / \
+   T0  T1
+*/
+void left_rotate(rb *T, noRB *x)
+{
+    // y será o novo pai de x após a rotação; inicialmente, é o filho direito de x
     noRB *y = x->dir;
+
+    // Move a subárvore esquerda de y para ser a subárvore direita de x
     x->dir = y->esq;
+
+    // Se a subárvore esquerda de y não é nula, atualiza seu pai para ser x
     if (y->esq != T->nil)
         y->esq->pai = x;
 
+    // Liga y ao pai de x
     y->pai = x->pai;
+
+    // Se x era a raiz, y se torna a nova raiz da árvore
     if (x->pai == T->nil)
         T->raiz = y;
-    else if (x == x->pai->esq)
+    else if (x == x->pai->esq) // Se x era filho à esquerda, atualiza o ponteiro do pai para y
         x->pai->esq = y;
-    else
+    else // Caso contrário, x era filho à direita, atualiza o ponteiro do pai para y
         x->pai->dir = y;
 
+    // Coloca x como filho esquerdo de y
     y->esq = x;
+
+    // Atualiza o pai de x para ser y
     x->pai = y;
 }
 
-void right_rotate(rb *T, noRB *y) {
+/*  Antes da rotação à direita de y
+
+        y
+       /
+      x
+     / \
+   T0  T1
+
+    Após a rotação:
+
+        x
+       / \
+     T0   y
+         / \
+       T1  T2
+*/
+void right_rotate(rb *T, noRB *y)
+{
+    // x será o novo pai de y após a rotação; inicialmente, é o filho esquerdo de y
     noRB *x = y->esq;
+
+    // Move a subárvore direita de x para ser a subárvore esquerda de y
     y->esq = x->dir;
+
+    // Se a subárvore direita de x não é nula, atualiza seu pai para ser y
     if (x->dir != T->nil)
         x->dir->pai = y;
 
+    // Liga x ao pai de y
     x->pai = y->pai;
+
+    // Se y era a raiz, x se torna a nova raiz da árvore
     if (y->pai == T->nil)
         T->raiz = x;
+
+    // Se y era filho à esquerda de seu pai, atualiza o ponteiro do pai para x
     else if (y == y->pai->esq)
         y->pai->esq = x;
+
+    // Caso contrário, y era filho à direita, atualiza o ponteiro do pai para x
     else
         y->pai->dir = x;
 
+    // Coloca y como filho direito de x
     x->dir = y;
+
+    // Atualiza o pai de y para ser x
     y->pai = x;
 }
 

@@ -136,3 +136,25 @@ void escreveArquivo(char *nomeArquivo, char *operacao, int quantidade_rotacoes, 
     fprintf(arq, "%s;%d;%d;%d;%d\n", operacao, quantidade_rotacoes, quantidade_split, altura_arvore, total_blocos);
     fclose(arq);
 };
+
+int *geraVetorPorOpcao(int op, int qtyElementos) {
+    int *elementos;
+    
+    switch(op) {
+            // Ordem crescente
+            case 1:
+                elementos = geraOrdenados(qtyElementos, 0);
+                break;
+            case 2:
+                elementos = geraOrdenados(qtyElementos, 1);
+                break;
+            case 3:
+                elementos = geraAleatorios(qtyElementos, time(NULL));
+                break;
+            default:
+                elementos = NULL;
+                printf("Opção inválida.\n");
+        }
+
+    return elementos;
+}

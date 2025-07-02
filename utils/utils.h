@@ -49,3 +49,5 @@ int *geraAleatorios(int tam, int semente);
     etc
 */
 void escreveArquivo(char *nomeArquivo, char *operacao, int quantidade_rotacoes, int quantidade_split, int altura_arvore, int total_blocos);
+
+int *geraVetorPorOpcao(int op, int qtyElementos);

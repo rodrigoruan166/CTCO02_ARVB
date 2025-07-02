@@ -1,5 +1,5 @@
 /******************************************************************************
- * Arquivo: testeConversor.c
+ * Arquivo: testeConversor.h
  *
  * Descrição: Testes unitários para a conversão implementada
  *            em /algoritmos. Este arquivo contém os casos de teste para
@@ -12,28 +12,31 @@
  *
  * Data: 29/06/2025
  ******************************************************************************/
+
 typedef void (*f)();
 
-void teste1();
+// Testes de conversão 2-3-4 em Rubro-Negra com padrões variados
 
-void teste2();
+void teste1();  // Conversão com mistura de inserções à esquerda e à direita, testando chaves internas e externas
 
-void teste3();
+void teste2();  // Conversão com inserção sequencial (10 a 100), testa balanceamento e cor após muitos splits
 
-void teste4();
+void teste3();  // Inserção complexa e balanceada, com muitos splits e múltiplos níveis
 
-void teste5();
+void teste4();  // Inserção de 4 chaves que forçam criação de um nó 3 e depois 4: testa divisão simples
 
-void teste6();
+void teste5();  // Inserções que formam subárvores profundas e forçam conversões com nós internos complexos
 
-void teste7();
+void teste6();  // Inserções com padrão binário clássico (como uma árvore AVL simples) - testa estrutura simétrica
 
-void teste8();
+void teste7();  // Cenário típico de livro (ex: CLRS) para formar árvore rubro-negra de altura razoável
 
-void teste9();
+void teste8();  // Inserção em ordem quase reversa, força balanceamento pela esquerda
 
-void teste10();
+void teste9();  // Inserções com dispersão de chaves e simulações de nós 4 distribuídos entre vários níveis
 
-void teste11();
+void teste10(); // Inserções em ordem reversa, formando uma árvore degenerada e testando conversão em profundidade
 
-void teste12();
+void teste11(); // Inserção de chaves com muitos valores intermediários: testa conversão com vários filhos por nó
+
+void teste12(); // Conversão com remoções planejadas no teste da 2-3-4 original, seguida de conversão e ordenações
