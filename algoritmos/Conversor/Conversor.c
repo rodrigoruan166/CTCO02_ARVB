@@ -29,7 +29,7 @@ noRB* convert234ToRB(no234 *node, rb *arvore) {
     int ocupacao = getOcupacaoChaves(node);
 
     if (ocupacao == 1) {
-        // 1 Nó -> nó preto
+        // 1 Nó: nó preto
         noRB *raiz = criaNoRB(chaves[0], 'P', arvore);
         noRB *esq = convert234ToRB(filhos[0], arvore);
         noRB *dir = convert234ToRB(filhos[1], arvore);
@@ -41,7 +41,7 @@ noRB* convert234ToRB(no234 *node, rb *arvore) {
 
         return raiz;
     } else if (ocupacao == 2) {
-        // 2 Nós -> preto com filho vermelho à direita
+        // 2 Nós: preto com filho vermelho à direita
         noRB *raiz = criaNoRB(chaves[0], 'P', arvore);
         noRB *filhoDir = criaNoRB(chaves[1], 'V', arvore);
 
@@ -62,7 +62,7 @@ noRB* convert234ToRB(no234 *node, rb *arvore) {
         return raiz;
 
     } else if (ocupacao == 3) {
-        // 3 Nós → preto com dois filhos vermelhos
+        // 3 Nós: preto com dois filhos vermelhos
         noRB *raiz = criaNoRB(chaves[1], 'P', arvore);
         noRB *filhoEsq = criaNoRB(chaves[0], 'V', arvore);
         noRB *filhoDir = criaNoRB(chaves[2], 'V', arvore);

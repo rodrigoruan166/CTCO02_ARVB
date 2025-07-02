@@ -56,7 +56,6 @@ void teste2(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// PEGA SUCESSOR PARA DAR REPLACE NO ELEMENTO EXCLUIDO
 void teste3(arv234 *arv)
 {
 
@@ -75,7 +74,6 @@ void teste3(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// REMOVE DO FOLHA do meio, KEYS > MIN_KEYS
 void teste4(arv234 *arv)
 {
 
@@ -93,7 +91,6 @@ void teste4(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// REMOVE DO FOLHA do canto esquerdo, KEYS > MIN_KEYS
 void teste5(arv234 *arv)
 {
 
@@ -111,7 +108,6 @@ void teste5(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// REMOVE DO FOLHA do canto direito, KEYS > MIN_KEYS
 void teste6(arv234 *arv)
 {
 
@@ -129,7 +125,6 @@ void teste6(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// REMOVE FOLHA COM MERGE À DIREITA
 void teste7(arv234 *arv)
 {
 
@@ -147,7 +142,6 @@ void teste7(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// ROTAÇÃO À ESQUERDA
 // 10;9;8;6;5;4;3
 void teste8(arv234 *arv)
 {
@@ -166,7 +160,6 @@ void teste8(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// MERGE à ESQUERDA
 // 5;10;20;30;40;50
 void teste9(arv234 *arv)
 {
@@ -186,7 +179,6 @@ void teste9(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// MERGE à DIREITA
 // 5;10;20;30;40;50
 void teste10(arv234 *arv)
 {
@@ -224,7 +216,6 @@ void teste11(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// Inserção em nó folha sem split
 void teste12(arv234 *arv)
 {
 
@@ -241,7 +232,6 @@ void teste12(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// Inserção em nó gerando split na folha
 void teste13(arv234 *arv)
 {
 
@@ -258,7 +248,6 @@ void teste13(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// Inserção causa split em folha e propagação para raiz
 void teste14(arv234 *arv)
 {
 
@@ -275,8 +264,6 @@ void teste14(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// Inserção com split em um nó interno
-// Folha faz split e o pai tem 3 chaves
 void teste15(arv234 *arv)
 {
 
@@ -293,7 +280,6 @@ void teste15(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// Remoção de uma chave de um nó folha com mais de 1 chave
 void teste16(arv234 *arv)
 {
 
@@ -311,7 +297,6 @@ void teste16(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// Remoção de uma chave de um nó interno (redistribuição)
 void teste17(arv234 *arv)
 {
 
@@ -329,7 +314,6 @@ void teste17(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// Remoção de nó folha com 1 chave, merge com pai
 void teste18(arv234 *arv)
 {
 
@@ -348,7 +332,6 @@ void teste18(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// Remoção de nó folha com 1 chave, merge com pai
 void teste19(arv234 *arv)
 {
 
@@ -367,7 +350,6 @@ void teste19(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// Remoção da última chave da raiz (altura diminui)
 void teste20(arv234 *arv)
 {
 
@@ -387,7 +369,6 @@ void teste20(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// Remoção da última chave da raiz (altura diminui)
 void teste21(arv234 *arv)
 {
 
@@ -407,7 +388,6 @@ void teste21(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// 18;14;11;4;12;16;19;20;7;21;22
 void teste22(arv234 *arv)
 {
 
@@ -433,7 +413,6 @@ void teste22(arv234 *arv)
     imprimirPorNivel(arv);
 }
 
-// 17;20;25;23;12;115;55;47;31;21;43;44;46
 void teste23(arv234 *arv)
 {
 
@@ -460,7 +439,6 @@ void teste24(arv234 *arv)
     if (!arv)
         return;
 
-    // 3;4;5;2;1
     int chaves[] = {3, 4, 5, 2, 1};
 
     for (int i = 0; i < sizeof(chaves) / sizeof(int); i++)
@@ -515,7 +493,6 @@ void teste25(arv234 *arv)
 }
 
 // TAMANHO DE AMOSTRA PARA INSERÇÃO
-
 void teste26(arv234 *arv)
 {
     if (!arv)
