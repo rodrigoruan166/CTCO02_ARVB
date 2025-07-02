@@ -196,15 +196,6 @@ void RB_Insert_Fixup(rb *T, noRB *z)
     // Enquanto pai de z for vermelho, há violação da propriedade rubro-negra
     while (z->pai->cor == 'V')
     {
-        // verifica se o pai de z é filho à esquerda do avô
-        // Z estava à esquerda do pai - irmão (W) é o pai->direita
-        /*  | z | Sucessor (y) | Irmão (w)           |     Ação       |
-            |---|--------------|---------------------|----------------|
-            | p |      p       | 1    V              | Colore w de P, colore pai de V, rot. esq. no pai, w = filho dir do pai de y, caso 2, 3 ou 4
-            |   |              | 2 P e filhos P      | Colore w de vermelho, y = y->pai, Reavalia y
-            |   |              | 3 P e filho esq V   | Colore de preto o filho da esquerda de w, colore w de vermelho, w = filho da direita do pai de y, leva ao caso 4
-            |   |              | 4 P e filho dir V   | Colore w com a cor do pai, colore o pai de preto, colore o filho direito de w de preto e rotação à esquerda no pai de y
-        */
         if (z->pai == z->pai->pai->esq)
         {
             noRB *y = z->pai->pai->dir; // tio de z
@@ -239,14 +230,6 @@ void RB_Insert_Fixup(rb *T, noRB *z)
                 right_rotate(T, z->pai->pai); // rotação à direita no avô
             }
         }
-        // Z estava à esquerda do pai - irmão (W) é o pai->direita
-        /*  | z | Sucessor (y) | Irmão (w)           |     Ação       |
-            |---|--------------|---------------------|----------------|
-            | p |      p       | 1    V              | Colore w de P, colore pai de V, rot. esq. no pai, w = filho dir do pai de y, caso 2, 3 ou 4
-            |   |              | 2 P e filhos P      | Colore w de vermelho, y = y->pai, Reavalia y
-            |   |              | 3 P e filho dir V   | Colore de preto o filho da esquerda de w, colore w de vermelho, rotação à esquerda de w, w = filho da direita do pai de y, leva ao caso 4
-            |   |              | 4 P e filho esq V   | Colore w com a cor do pai, colore o pai de preto, colore o filho direito de w de preto e rotação à direita no pai de y
-        */
         else // Simétrico: pai de z é filho à direita do avô
         {
             // y é o tio de z (irmão esquerdo do pai)
