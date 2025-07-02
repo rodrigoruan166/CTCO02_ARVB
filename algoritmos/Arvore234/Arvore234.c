@@ -215,7 +215,6 @@ no234 *split(no234 *noCheio, arv234 *arv) {
     }
 
     if (!noCheio->folha) {
-        printf("Condicao no cheio nao e folha\n");
         int count = 0;
         for (int k = posicaoRisingNode + 1; k < MAX_FILHOS + 1; k++) {
             if (noCheio->vetFilho[k] != NULL) {
@@ -233,7 +232,6 @@ no234 *split(no234 *noCheio, arv234 *arv) {
 
     // Caso em que o split ocorre na raiz.
     if(noCheio->noPai == NULL) {
-        printf("Condicao noCheio e RAIZ\n");
         no234 *novoNoPai = alocaNo();
         // Obs: o nó já inicia com folha = 0, portanto não há necessidade de setar
         // Preenche a nova raiz (pós split) com os dados
@@ -252,7 +250,6 @@ no234 *split(no234 *noCheio, arv234 *arv) {
         return arv->raiz;
     } else {
         // Casos em que o noPai não é nulo (não é raiz)
-        printf("    caiu nesse caso??\n");
         // Busca a posição em que vamos inserir
         no234 *pai = noCheio->noPai;
         int i = pai->ocupacaoChaves;
@@ -381,7 +378,6 @@ no234 *buscaNo(int valor, int *pos, int *posNo, arv234 *arv) {
         
         if(flag) {
             *pos = i;
-            printf("Achou na posicao %d\n", *pos);
             printf("Encontrado: [");
             for(int i = 0; i < aux->ocupacaoChaves; i++) {
                 printf(" %d ", aux->vetChaves[i]);
@@ -651,12 +647,11 @@ void ajustarParaCima(no234 *no, arv234 *arv) {
     if (pai && pai->ocupacaoChaves < MIN_CHAVES)
             ajustarParaCima(pai, arv);
 
-    //atualizaAltura(arv);
 }
 
 void removeChave(int valor, arv234 *arv) {
     // Faz uma busca para encontrar o nó em que o valor está.
-    printf(">>>>>>>>>>>>> TENTANDO TIRAR %d <<<<<<<<<<<<<<<<<\n", valor);
+    printf("> Tentando remover %d\n", valor);
     int pos, posNo;
     no234 *aux = buscaNo(valor, &pos, &posNo, arv);
     if(!aux) {
@@ -669,7 +664,6 @@ void removeChave(int valor, arv234 *arv) {
 
         // Caso 1 (Folha) : Quantidade de chaves é maior que MIN_CHAVES
         if(aux->ocupacaoChaves > MIN_CHAVES) {
-            printf("c e pos: %d\n", pos);
             // Faz o shift caso o elemento seja no meio do vetor
             for(int index = pos; index < aux->ocupacaoChaves-1; index++) {
                 aux->vetChaves[index] = aux->vetChaves[index + 1];
@@ -689,9 +683,6 @@ void removeChave(int valor, arv234 *arv) {
         else {
             no234 *irmaoEsq = ((posNo-1) >= 0 && posNo - 1 < aux->noPai->ocupacaoFilhos && aux->noPai->vetFilho[posNo-1] != NULL) ? aux->noPai->vetFilho[posNo-1] : NULL;
             no234 *irmaoDir = (posNo + 1 < aux->noPai->ocupacaoFilhos && aux->noPai->vetFilho[posNo+1] != NULL) ? aux->noPai->vetFilho[posNo+1] : NULL;
-
-            printf("Veio para a condicao em que o pred tem menos de min key: pos: %d ocupacao %d e posNo %d\n", pos, aux->ocupacaoChaves, posNo);
-            printf("TESTESTESTE\n");
 
             // Se for possível, EMPRESTAR DA ESQ
             if(irmaoEsq != NULL && irmaoEsq->ocupacaoChaves > MIN_CHAVES) {
@@ -725,28 +716,20 @@ void removeChave(int valor, arv234 *arv) {
         no234 *irmaoDir = (posNo + 1 < a->noPai->ocupacaoFilhos && a->noPai->vetFilho[posNo+1] != NULL) ? a->noPai->vetFilho[posNo+1] : NULL;
         int valorPred = a->vetChaves[a->ocupacaoChaves-1];
 
-        printf("O valor de pred %d para a chave é %d\n", valorPred, valor);
-        printf("TESTESTESTE\n");
-        //
+        printf("O valor de predecessor %d para a chave é %d\n", valorPred, valor);
         // Caso 1: Nó do predecessor tem mais do que MIN_KEYS
         if(a->ocupacaoChaves > MIN_CHAVES) {
-            printf("Veio para a condicao em que o pred min key\n");
             aux->vetChaves[pos] = valorPred;
             a->vetChaves[a->ocupacaoChaves-1] = INT_MIN;
             a->ocupacaoChaves--;
         } else {
-            printf("Veio para a condicao em que o pred tem menos de min key: pos: %d ocupacao %d\n", pos, a->ocupacaoChaves);
             aux->vetChaves[pos] = valorPred;
             
-            printf("TEST TROCOU AUX VETCHAVES\n");
             a->vetChaves[a->ocupacaoChaves-1] = INT_MIN;
-            printf("REMOVE A VETCHAVES\n");
             a->ocupacaoChaves--;
-            printf("DECREMENTA A->OCUPACAO CHAVES\n");
 
             pos = a->ocupacaoChaves;
 
-            printf("IRMAO ESQUERDA NOT NULL: %d; IRMAO DIREITA NOT NULL: %d \n", irmaoEsq != NULL, irmaoDir!= NULL);
             if (irmaoDir != NULL) {
                 printf("IRMAO DIR EXISTE\n");
                 printf("IRMAO DIR: %d\n", irmaoDir->ocupacaoChaves);
@@ -757,7 +740,6 @@ void removeChave(int valor, arv234 *arv) {
                 printf("IRMAO ESQ: %d\n", irmaoEsq->ocupacaoChaves);
             }
     
-            printf("PASSOU POR AQUI\n");
 
             if(irmaoEsq && irmaoEsq->ocupacaoChaves > MIN_CHAVES) {
                 printf("Emprestando do irmao da esquerda.\n");
@@ -768,12 +750,11 @@ void removeChave(int valor, arv234 *arv) {
             // Se for possível, EMPRESTAR DA DIR
             else if(irmaoDir && irmaoDir->ocupacaoChaves > MIN_CHAVES) {
                 printf("Emprestando do irmao da direita.\n");
-                printf("Posicao %d e posNo %d\n", pos, posNo);
+                printf("# Posicao %d e posNo %d\n", pos, posNo);
                 borrowRight(arv, a, irmaoDir, pos, posNo);
                 //a->ocupacaoChaves++;
             }
             else {
-                printf("ENTROU NO ELSE DOS EMRGES\n");
                 // Se for possível, MERGE DA ESQ
                 if(irmaoEsq) {
                     printf("Merging do irmao da esquerda.\n");
