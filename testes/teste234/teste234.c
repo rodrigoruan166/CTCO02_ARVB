@@ -714,8 +714,10 @@ int main(arv234 *arv)
         functions[i](arv);
 
         printf("\n\n```\nTOTAL SPLIT %d \nTOTAL MERGE %d \nTOTAL BORROW %d\nTOTAL CHAVES %d\n ```", getTotalSplit(arv), getTotalMerge(arv), getTotalBorrow(arv), getTotalChaves(arv));
+        liberaNos234(getRaiz(arv));
         free(arv);
     }
 
+    printf("\nFinalizado\n");
     return 0;
 }

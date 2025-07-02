@@ -773,6 +773,14 @@ void removeChave(int valor, arv234 *arv) {
     }
 }
 
+void liberaNos234(no234 *no) {
+    if (!no) 
+        return;
+    for (int i = 0; i < no->ocupacaoFilhos; i++) 
+        liberaNos234(no->vetFilho[i]);
+    free(no);
+};
+
 void insereChave(int valor, arv234 *arv) {
     no234 *aux = arv->raiz;
 

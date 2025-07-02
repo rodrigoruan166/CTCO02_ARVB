@@ -125,6 +125,9 @@ int atualizaAltura(arv234 *a);
 /*Retorna a altura e atualiza na estrutura da árvore*/
 int atualizaQuantBlocos(arv234 *arv, no234 *no);
 
+/*Libera nós recursivamente*/
+void liberaNos234(no234 *no);
+
 /*Retorna o nó que contém o valor do argumento. Atualiza pos como a posição do 
   elemento no nó e posNo com a posição relativa em relação ao seu pai */
 no234 *buscaNo(int valor, int *pos, int *posNo, arv234 *arv);
